@@ -19,6 +19,13 @@
   .reveal{opacity:0;transform:translateY(28px);filter:blur(6px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}
   .reveal.in{opacity:1;transform:none;filter:none}
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;filter:none;transition:none}}
+  .feed-mobile .feed-item{padding:7px 10px;border-radius:13px;gap:9px}
+  .feed-mobile .tile{width:26px;height:26px;border-radius:8px}
+  .feed-mobile .tile svg{width:14px;height:14px}
+  .feed-mobile .feed-item span.block:first-child{font-size:12px}
+  .feed-mobile .feed-item span.block:last-child{font-size:11px}
+  .feed-mobile .feed-item>span:last-child{font-size:10px}
+  .feed-mobile>div:first-child{font-size:11px;margin-bottom:0}
   @keyframes roll-in{from{opacity:0;filter:blur(6px);transform:translateY(.8em)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
   .roll-in{animation:roll-in .65s cubic-bezier(.16,1,.3,1) both}
   @keyframes feed-in{from{opacity:0;filter:blur(8px);transform:translateY(24px) scale(.96)}to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
@@ -53,6 +60,24 @@ class Safe extends Component { constructor(p) { super(p); this.state = { err: fa
 function HeroShader() {
   const [S, setS] = useState(null);
   useEffect(() => { if (!navigator.gpu) return; import('shaders/react').then(m => setS(m)).catch(() => {}); }, []);
+  useEffect(() => {
+    if (!S) return;
+    const touch = matchMedia('(hover: none), (pointer: coarse)').matches;
+    if (!touch) return;
+    let raf = 0, t0 = performance.now(), lastTouch = 0;
+    const onTouch = () => { lastTouch = performance.now(); };
+    addEventListener('touchmove', onTouch, { passive: true });
+    const loop = now => {
+      raf = requestAnimationFrame(loop);
+      if (scrollY > innerHeight * 1.1 || now - lastTouch < 2500) return;   // не мешаем пальцу и не тратим батарею ниже героя
+      const t = (now - t0) / 1000, w = innerWidth, h = innerHeight;
+      const x = w * (0.5 + 0.44 * Math.sin(t * 1.05) * Math.cos(t * 0.31));
+      const y = h * (0.42 + 0.36 * Math.sin(t * 1.45 + 1.3));
+      dispatchEvent(new MouseEvent('mousemove', { clientX: x, clientY: y }));
+    };
+    raf = requestAnimationFrame(loop);
+    return () => { cancelAnimationFrame(raf); removeEventListener('touchmove', onTouch); };
+  }, [S]);
   if (!S) return null;
   const { Shader, Swirl, ChromaFlow, FlutedGlass, FilmGrain } = S;
   return html`<${Safe}><${Shader} className="w-full h-full">
@@ -105,7 +130,7 @@ function RotatingWord() {
 const Words = ({ text, start = 0 }) => text.split(' ').map((w, k) => html`<span key=${k} className="w-in" style=${{ animationDelay: (start + k * 0.07) + 's' }}>${w}${' '}</span>`);
 
 
-const Tile = ({ bg, children }) => html`<span className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)]" style=${{ background: bg }}>${children}</span>`;
+const Tile = ({ bg, children }) => html`<span className="tile w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)]" style=${{ background: bg }}>${children}</span>`;
 const ICONS = {
   instagram: () => html`<${Tile} bg="linear-gradient(45deg,#f9a825 0%,#e1306c 50%,#833ab4 100%)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="#fff" stroke="none"/></svg><//>`,
   tiktok: () => html`<${Tile} bg="#111"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M15.5 3c.4 2.4 1.9 4 4.5 4.3v3.2c-1.6 0-3.1-.5-4.4-1.4v6.2a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v3.3a2.6 2.6 0 1 0 1.8 2.5V3h3Z" fill="#25F4EE" transform="translate(-.9 .6)"/><path d="M15.5 3c.4 2.4 1.9 4 4.5 4.3v3.2c-1.6 0-3.1-.5-4.4-1.4v6.2a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v3.3a2.6 2.6 0 1 0 1.8 2.5V3h3Z" fill="#FE2C55" transform="translate(.9 -.4)"/><path d="M15.5 3c.4 2.4 1.9 4 4.5 4.3v3.2c-1.6 0-3.1-.5-4.4-1.4v6.2a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v3.3a2.6 2.6 0 1 0 1.8 2.5V3h3Z" fill="#fff"/></svg><//>`,
@@ -133,7 +158,7 @@ function ActivityFeed({ mobile = false }) {
   const [n, setN] = useState(1);
   useEffect(() => { const id = setInterval(() => setN(v => v + 1), 2100); return () => clearInterval(id); }, []);
   const items = []; for (let k = Math.max(0, n - (mobile ? 2 : 4)); k < n; k++) items.push(k);
-  return html`<div className=${mobile ? "lg:hidden flex flex-col gap-2 mb-8 max-w-[360px]" : "hidden lg:flex absolute right-12 bottom-20 z-20 w-[330px] flex-col gap-2.5"}>
+  return html`<div className=${mobile ? "feed-mobile lg:hidden flex flex-col gap-1.5 mb-6 max-w-[290px]" : "hidden lg:flex absolute right-12 bottom-20 z-20 w-[330px] flex-col gap-2.5"}>
     <div className="flex items-center gap-2 text-[12px] text-gray-600 mb-1 pl-1"><span className="live-dot w-2 h-2 rounded-full bg-[#F26522]"></span> Сейчас работаем за клиентов</div>
     ${items.map((k, idx) => { const [ic, t, d] = FEED[k % FEED.length]; const age = items.length - 1 - idx;
       return html`<div key=${k} className="feed-item bg-white/75 backdrop-blur-md rounded-2xl px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)] flex items-center gap-3 transition-opacity duration-700" style=${{ opacity: 1 - age * 0.22 }}>
