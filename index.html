@@ -7,7 +7,6 @@
 <meta name="description" content="Соцсети, видео, звонки, рассылки, боты, реклама и сайты — забираем рутину, чтобы вы занимались бизнесом.">
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
 <style>
-  html{scroll-behavior:smooth}
   html,body{margin:0;background:#EFEFEF}
   section[id]{scroll-margin-top:12px}
   body{-webkit-font-smoothing:antialiased}
@@ -17,6 +16,9 @@
   .liquid-glass-strong{background:rgba(255,255,255,.01);backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);box-shadow:inset 0 1px 1px rgba(255,255,255,.1)}
   @keyframes word-in{from{opacity:0;filter:blur(10px);transform:translateY(.45em)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
   .w-in{display:inline-block;opacity:0;animation:word-in .9s cubic-bezier(.16,1,.3,1) both}
+  .reveal{opacity:0;transform:translateY(28px);filter:blur(6px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none;filter:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;filter:none;transition:none}}
   @keyframes roll-in{from{opacity:0;filter:blur(6px);transform:translateY(.8em)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
   .roll-in{animation:roll-in .65s cubic-bezier(.16,1,.3,1) both}
   @keyframes feed-in{from{opacity:0;filter:blur(8px);transform:translateY(24px) scale(.96)}to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
@@ -226,7 +228,7 @@ const SERVICES = [
 ];
 
 function Badge({ n, label, border = 'border-gray-200' }) {
-  return html`<div className="px-5 sm:px-8 lg:px-12 flex items-center gap-3 mb-6 sm:mb-8">
+  return html`<div className="reveal px-5 sm:px-8 lg:px-12 flex items-center gap-3 mb-6 sm:mb-8">
     <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-900 text-white text-[11px] sm:text-[12px] font-semibold flex items-center justify-center">${n}</span>
     <span className=${`text-[12px] sm:text-[13px] font-medium border ${border} rounded-full px-3 sm:px-4 py-1 sm:py-1.5 text-gray-900`}>${label}</span>
   </div>`;
@@ -239,11 +241,11 @@ function Services() {
   <section id="services" className="bg-white pt-16 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 overflow-hidden">
     <div className="max-w-[1440px] mx-auto">
       <${Badge} n="1" label="Что мы делаем" />
-      <h2 className="px-5 sm:px-8 lg:px-12 text-[clamp(1.5rem,4vw,3.2rem)] font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 mb-8 sm:mb-10">
+      <h2 className="reveal px-5 sm:px-8 lg:px-12 text-[clamp(1.5rem,4vw,3.2rem)] font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 mb-8 sm:mb-10">
         Одна команда вместо пяти подрядчиков —<br className="hidden sm:block" /><span className="sm:hidden"> </span>соцсети, звонки, боты, реклама и сайты.
       </h2>
 
-      <div className="px-5 sm:px-8 lg:px-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-12">
+      <div className="reveal px-5 sm:px-8 lg:px-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-12" style=${{ transitionDelay: '.12s' }}>
         <div className="max-w-[640px]">
           <p className="text-[15px] sm:text-[17px] lg:text-[18px] leading-[1.6] font-medium text-gray-900">Берём на себя всю рутину и снимаем с вас головную боль. Пишете задачу в мессенджер — мы делаем её под ключ. Без найма штата, без долгих согласований и технических вопросов.</p>
           <div className="flex flex-wrap gap-2 mt-5">
@@ -256,13 +258,13 @@ function Services() {
       </div>
 
       <div className="px-5 sm:px-8 lg:px-12 mt-16 sm:mt-20 lg:mt-28">
-        <div className="flex items-end justify-between flex-wrap gap-3 mb-8">
+        <div className="reveal flex items-end justify-between flex-wrap gap-3 mb-8">
           <h3 className="text-[22px] sm:text-[28px] font-medium tracking-[-0.02em] text-gray-900">Все услуги</h3>
           <span className="text-[13px] text-gray-600"><span className="sm:hidden">Нажмите на направление · </span>${total} услуг в ${SERVICES.length} направлениях — и это не предел</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200 rounded-2xl overflow-hidden border border-gray-200">
           ${SERVICES.map(([title, items], i) => html`
-            <div key=${title} onClick=${() => setOpenSvc(openSvc === i ? -1 : i)} className="group bg-white p-5 sm:p-7 hover:bg-[#FFF6F1] transition-colors duration-300 cursor-pointer sm:cursor-default">
+            <div key=${title} onClick=${() => setOpenSvc(openSvc === i ? -1 : i)} style=${{ transitionDelay: (i % 3) * 0.08 + 's' }} className="reveal group bg-white p-5 sm:p-7 hover:bg-[#FFF6F1] transition-colors duration-300 cursor-pointer sm:cursor-default">
               <div className="flex items-center justify-between mb-2 sm:mb-4">
                 <span className="text-[12px] font-semibold text-gray-400 tabular-nums">${String(i + 1).padStart(2, '0')}</span>
                 <span className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#F26522] group-hover:border-[#F26522] transition-colors duration-300">
@@ -283,9 +285,9 @@ function Projects() {
   <section id="projects" className="bg-[#F5F5F5] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 lg:pb-28">
     <div className="max-w-[1440px] mx-auto">
       <${Badge} n="2" label="Работа для клиентов" border="border-gray-300" />
-      <h2 className="px-5 sm:px-8 lg:px-12 text-[clamp(1.75rem,7vw,4.2rem)] sm:text-[clamp(2.5rem,5vw,4.2rem)] font-medium leading-[1.08] tracking-[-0.03em] text-gray-900 mb-10 sm:mb-14 lg:mb-16">Наши проекты</h2>
+      <h2 className="reveal px-5 sm:px-8 lg:px-12 text-[clamp(1.75rem,7vw,4.2rem)] sm:text-[clamp(2.5rem,5vw,4.2rem)] font-medium leading-[1.08] tracking-[-0.03em] text-gray-900 mb-10 sm:mb-14 lg:mb-16">Наши проекты</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-7 px-5 sm:px-8 lg:px-12">
-        <a href="https://maing.ru/" target="_blank" rel="noopener" className="block">
+        <a href="https://maing.ru/" target="_blank" rel="noopener" className="reveal block" style=${{ transitionDelay: '0.00s' }}>
           <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#1a1d2e] group cursor-pointer">
             <img src="media/cases/m_home.jpg" alt="Сайт maing.ru — вывески" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
             <span className="absolute z-10 bottom-4 left-4 flex items-center h-9 w-9 group-hover:w-[148px] bg-white rounded-full overflow-hidden transition-all duration-300 ease-in-out">
@@ -297,14 +299,14 @@ function Projects() {
           <p className="text-[13px] sm:text-[14px] text-gray-600 mt-4 leading-relaxed">Производитель вывесок: ведём соцсети, делаем рассылки по клиентской базе и сделали ботов для заявок</p>
           <p className="text-[14px] sm:text-[15px] font-semibold text-gray-900 mt-1">MAING · вывески</p>
         </a>
-        <div className="block">
+        <div className="reveal block" style=${{ transitionDelay: '0.12s' }}>
           <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#6b6b6b] group">
             <img src="media/cases/m_stand.jpg" alt="Сайт maing.ru — оформление стендов" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
                       </div>
           <p className="text-[13px] sm:text-[14px] text-gray-600 mt-4 leading-relaxed">Оформление выставок и стендов: ведём соцсети и делаем рассылки по клиентской базе</p>
           <p className="text-[14px] sm:text-[15px] font-semibold text-gray-900 mt-1">MAING · стенды</p>
         </div>
-        <a href="https://velionagency.ru/" target="_blank" rel="noopener" className="block">
+        <a href="https://velionagency.ru/" target="_blank" rel="noopener" className="reveal block" style=${{ transitionDelay: '0.00s' }}>
           <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#0b0d12] group cursor-pointer">
             <img src="media/cases/v1.jpg" alt="Сайт velionagency.ru" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
             <span className="absolute z-10 bottom-4 left-4 flex items-center h-9 w-9 group-hover:w-[160px] bg-white rounded-full overflow-hidden transition-all duration-300 ease-in-out">
@@ -315,7 +317,7 @@ function Projects() {
           <p className="text-[13px] sm:text-[14px] text-gray-600 mt-4 leading-relaxed">Сайт агентства сайтов, Telegram-ботов и ИИ-агентов: тёмный дизайн, демо ИИ-агента, калькулятор стоимости проекта, кейсы и команда</p>
           <p className="text-[14px] sm:text-[15px] font-semibold text-gray-900 mt-1">Velion · velionagency.ru</p>
         </a>
-        <a href="https://egolab.shop/" target="_blank" rel="noopener" className="block">
+        <a href="https://egolab.shop/" target="_blank" rel="noopener" className="reveal block" style=${{ transitionDelay: '0.12s' }}>
           <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#f6c78c] group cursor-pointer">
             <img src="media/cases/egolab.jpg" alt="Сайт egolab.shop" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
             <span className="absolute z-10 bottom-4 left-4 flex items-center h-9 w-9 group-hover:w-[160px] bg-gray-900 rounded-full overflow-hidden transition-all duration-300 ease-in-out">
@@ -339,8 +341,8 @@ function Contacts() {
   <section id="contacts" className="bg-gray-900 text-white">
     <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-28 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
       <div>
-        <p className="text-[13px] text-gray-400 tracking-wide mb-5">Контакты</p>
-        <h2 className="text-[clamp(1.75rem,5vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.03em]">Отдайте нам задачу,<br/>на которую нет времени.</h2>
+        <p className="reveal text-[13px] text-gray-400 tracking-wide mb-5">Контакты</p>
+        <h2 className="reveal text-[clamp(1.75rem,5vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.03em]" style=${{ transitionDelay: '.08s' }}>Отдайте нам задачу,<br/>на которую нет времени.</h2>
         <div className="flex flex-wrap items-center gap-x-10 gap-y-4 mt-10 text-[14px]">
           <a href="https://t.me/ia_agency" target="_blank" rel="noopener" className="group inline-flex items-center gap-3">
             <span className="w-10 h-10 rounded-full bg-[#2AABEE] flex items-center justify-center"><${Send} size=${17} color="#fff" strokeWidth=${2.2} style=${{ marginLeft: '-2px' }} /></span>
@@ -357,7 +359,41 @@ function Contacts() {
   </section>`;
 }
 
-const App = () => html`<main id="top"><${Hero} /><${Services} /><${Projects} /><${Contacts} /></main>`;
+
+// ---------- плавная прокрутка к якорям ----------
+let scrollAnim = 0;
+const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+function smoothTo(y) {
+  cancelAnimationFrame(scrollAnim);
+  const start = scrollY, dist = y - start, dur = Math.min(1200, Math.max(700, Math.abs(dist) * 0.45)), t0 = performance.now();
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { scrollTo(0, y); return; }
+  const step = now => { const k = Math.min(1, (now - t0) / dur); scrollTo(0, start + dist * easeIO(k)); if (k < 1) scrollAnim = requestAnimationFrame(step); };
+  scrollAnim = requestAnimationFrame(step);
+}
+['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => cancelAnimationFrame(scrollAnim), { passive: true }));
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const id = a.getAttribute('href'); if (id === '#') return;
+  const el = id === '#top' ? null : document.querySelector(id);
+  if (id !== '#top' && !el) return;
+  e.preventDefault();
+  const y = el ? el.getBoundingClientRect().top + scrollY - 8 : 0;
+  // мобильное меню закрывается и снимает блокировку прокрутки — ждём кадр
+  requestAnimationFrame(() => smoothTo(Math.max(0, Math.min(y, document.documentElement.scrollHeight - innerHeight))));
+  history.replaceState(null, '', id === '#top' ? location.pathname : id);
+});
+
+// ---------- плавное появление блоков ----------
+function useReveal() {
+  useEffect(() => {
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    const scan = () => document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+    scan(); const t = setTimeout(scan, 300);
+    return () => { io.disconnect(); clearTimeout(t); };
+  }, []);
+}
+
+const App = () => { useReveal(); return html`<main id="top"><${Hero} /><${Services} /><${Projects} /><${Contacts} /></main>`; };
 createRoot(document.getElementById('root')).render(html`<${App} />`);
 </script>
 </body>
