@@ -7,7 +7,9 @@
 <meta name="description" content="Соцсети, видео, звонки, рассылки, боты, реклама и сайты — забираем рутину, чтобы вы занимались бизнесом.">
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
 <style>
+  html{scroll-behavior:smooth}
   html,body{margin:0;background:#EFEFEF}
+  section[id]{scroll-margin-top:12px}
   body{-webkit-font-smoothing:antialiased}
   .liquid-glass{background:rgba(255,255,255,.01);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:inset 0 1px 1px rgba(255,255,255,.1);position:relative}
   .liquid-glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.2));
@@ -146,7 +148,7 @@ function ActivityFeed({ mobile = false }) {
   </div>`;
 }
 
-const NAV = [['Услуги', '#services'], ['Проекты', '#projects'], ['Портфолио', 'index.html#examples'], ['Контакты', '#contacts']];
+const NAV = [['Главная', '#top'], ['Услуги', '#services'], ['Проекты', '#projects'], ['Контакты', '#contacts']];
 
 // ---------- 1. Главный экран ----------
 function Hero() {
@@ -161,7 +163,7 @@ function Hero() {
     <div className="relative z-20 w-full max-w-[1440px] mx-auto p-2 sm:p-3">
       <nav className="bg-white rounded-full p-[5px] flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <a href="#" className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-900 rounded-full flex items-center justify-center text-white text-[10px] sm:text-[11px] font-bold tracking-tight">IA</a>
+          <a href="#top" className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-900 rounded-full flex items-center justify-center text-white text-[10px] sm:text-[11px] font-bold tracking-tight">IA</a>
           <div className="hidden md:flex items-center gap-6">
             ${NAV.map(([l, h]) => html`<a key=${l} href=${h} className="text-[14px] text-gray-900 hover:text-gray-500 transition-colors duration-300">${l}</a>`)}
           </div>
@@ -354,7 +356,7 @@ function Contacts() {
   </section>`;
 }
 
-const App = () => html`<main><${Hero} /><${Services} /><${Projects} /><${Contacts} /></main>`;
+const App = () => html`<main id="top"><${Hero} /><${Services} /><${Projects} /><${Contacts} /></main>`;
 createRoot(document.getElementById('root')).render(html`<${App} />`);
 </script>
 </body>
