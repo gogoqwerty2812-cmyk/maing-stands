@@ -43,6 +43,9 @@ a{color:inherit;text-decoration:none} button{font-family:inherit} img{display:bl
 @keyframes drift2{to{transform:translate(-16vw,12vw) scale(.9)}}
 @keyframes drift3{to{transform:translate(-10vw,-12vw) scale(1.2)}}
 @keyframes in-photo{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:none}}
+#ribbons{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:screen;opacity:0;animation:rib-in 2.6s var(--ease) .3s forwards;
+  mask-image:linear-gradient(180deg,#000 0%,#000 48%,transparent 78%);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 48%,transparent 78%)}
+@keyframes rib-in{from{opacity:0;transform:translateY(-3%) scale(1.04)}to{opacity:1;transform:none}}
 .hero-photo::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(0,0,0,0) 0%,rgba(0,0,0,.35) 70%),linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,#000 100%)}
 .hero-photo .lines{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 120px);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 60%,transparent);-webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 60%,transparent)}
 
@@ -246,7 +249,7 @@ footer.site{position:relative;z-index:1;border-top:1px solid var(--border-soft);
 </head>
 <body style="background:#000;color:#fff">
 <div class="grain" aria-hidden="true"></div>
-<div class="hero-photo" aria-hidden="true"><div class="lines"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="spot" id="spot"></div></div>
+<div class="hero-photo" aria-hidden="true"><div class="lines"></div><canvas id="ribbons"></canvas><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="spot" id="spot"></div></div>
 
 <div class="page">
   <div class="menu-backdrop" aria-hidden="true"></div>
@@ -427,6 +430,61 @@ footer.site{position:relative;z-index:1;border-top:1px solid var(--border-soft);
     spot.style.transform = `translate(${sx - innerWidth / 2}px,${sy - innerHeight * .4}px)`;
     requestAnimationFrame(loop);
   })(performance.now());
+
+
+  // ---------- светящиеся ленты ----------
+  (() => {
+    const cv = document.getElementById('ribbons'); if (!cv) return;
+    const c = cv.getContext('2d'); let W = 0, H = 0;
+    const size = () => { const d = 1; W = innerWidth; H = innerHeight; cv.width = W * d; cv.height = H * d; c.setTransform(d, 0, 0, d, 0, 0); };
+    size(); addEventListener('resize', size);
+    const R = [
+      { y: .22, amp: .10, k: 1.4, sp: .34, lines: 50, spread: .16, tw: 1.15, tws: .36, bright: 1.25, tilt: .06 },
+      { y: .38, amp: .07, k: 2.0, sp: -.26, lines: 34, spread: .10, tw: 1.6, tws: -.3, bright: .85, tilt: -.08 },
+      { y: .12, amp: .05, k: 2.7, sp: .2, lines: 16, spread: .045, tw: 2.1, tws: .5, bright: .45, tilt: .09 },
+    ];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let visible = true;
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(cv);
+    const draw = now => {
+      if (!reduce) requestAnimationFrame(draw);
+      if (!visible && !reduce) return;
+      const t = now / 1000;
+      c.clearRect(0, 0, W, H); c.globalCompositeOperation = 'lighter'; c.lineCap = 'round';
+      const step = Math.max(14, W / 80);
+      R.forEach((r, ri) => {
+        // бегущий блик вдоль ленты
+        const hl = ((t * .07 + ri * .33) % 1.5) - .25;
+        const g = c.createLinearGradient(0, 0, W, 0);
+        g.addColorStop(0, 'rgba(200,215,255,.08)');
+        g.addColorStop(Math.max(0, Math.min(1, hl - .22)), 'rgba(205,218,255,.5)');
+        g.addColorStop(Math.max(0, Math.min(1, hl)), 'rgba(255,255,255,1)');
+        g.addColorStop(Math.max(0, Math.min(1, hl + .22)), 'rgba(205,218,255,.5)');
+        g.addColorStop(1, 'rgba(200,215,255,.08)');
+        for (let i = 0; i < r.lines; i++) {
+          const u = i / (r.lines - 1) - .5, edge = 1 - Math.abs(u) * 1.75;
+          if (edge <= 0) continue;
+          c.beginPath();
+          for (let x = -40; x <= W + 40; x += step) {
+            const nx = x / W;
+            const twist = Math.sin(nx * Math.PI * r.tw + t * r.tws + ri);
+            const y = H * (r.y + r.tilt * (nx - .5))
+              + H * r.amp * Math.sin(nx * Math.PI * r.k + t * r.sp + ri * 1.7)
+              + H * r.amp * .35 * Math.sin(nx * Math.PI * r.k * 2.3 - t * r.sp * 1.6)
+              + u * r.spread * H * twist;
+            x === -40 ? c.moveTo(x, y) : c.lineTo(x, y);
+          }
+          c.strokeStyle = g;
+          c.globalAlpha = Math.min(1, r.bright * edge * edge * .8);
+          c.lineWidth = Math.abs(u) < .08 ? 2 : 1.2;
+          c.stroke();
+          if (i % 7 === 0) { c.globalAlpha = r.bright * edge * .1; c.lineWidth = 16; c.stroke(); }
+        }
+      });
+      c.globalAlpha = 1; c.globalCompositeOperation = 'source-over';
+    };
+    requestAnimationFrame(draw);
+  })();
 
   // ---------- меню ----------
   const burger = $('.burger'), nav = $('#site-nav');
