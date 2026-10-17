@@ -2,424 +2,455 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
 <title>IA_agency — цифровая правая рука бизнеса</title>
-<meta name="description" content="Соцсети, видео, звонки, рассылки, боты, реклама и сайты — забираем рутину, чтобы вы занимались бизнесом.">
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<meta name="description" content="Соцсети, видео, звонки, рассылки, боты, реклама и сайты — забираем рутину, чтобы вы занимались делом.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%23fff'/%3E%3Cstop offset='1' stop-color='%239e9e9e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Ctext x='16' y='21.5' text-anchor='middle' font-family='Arial' font-weight='700' font-size='14' fill='%23111'%3EIA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <style>
-  html,body{margin:0;background:#EFEFEF}
-  section[id]{scroll-margin-top:12px}
-  body{-webkit-font-smoothing:antialiased}
-  .liquid-glass{background:rgba(255,255,255,.01);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:inset 0 1px 1px rgba(255,255,255,.1);position:relative}
-  .liquid-glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.2));
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-  .liquid-glass-strong{background:rgba(255,255,255,.01);backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);box-shadow:inset 0 1px 1px rgba(255,255,255,.1)}
-  @keyframes word-in{from{opacity:0;filter:blur(10px);transform:translateY(.45em)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
-  .w-in{display:inline-block;opacity:0;animation:word-in .9s cubic-bezier(.16,1,.3,1) both}
-  .reveal{opacity:0;transform:translateY(28px);filter:blur(6px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}
-  .reveal.in{opacity:1;transform:none;filter:none}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;filter:none;transition:none}}
-  .feed-mobile .feed-item{padding:7px 10px;border-radius:13px;gap:9px}
-  .feed-mobile .tile{width:26px;height:26px;border-radius:8px}
-  .feed-mobile .tile svg{width:14px;height:14px}
-  .feed-mobile .feed-item span.block:first-child{font-size:12px}
-  .feed-mobile .feed-item span.block:last-child{font-size:11px}
-  .feed-mobile .feed-item>span:last-child{font-size:10px}
-  .feed-mobile>div:first-child{font-size:11px;margin-bottom:0}
-  @keyframes roll-in{from{opacity:0;filter:blur(6px);transform:translateY(.8em)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
-  .roll-in{animation:roll-in .65s cubic-bezier(.16,1,.3,1) both}
-  @keyframes feed-in{from{opacity:0;filter:blur(8px);transform:translateY(24px) scale(.96)}to{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}}
-  .feed-item{animation:feed-in .7s cubic-bezier(.16,1,.3,1) both}
-  @keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(242,101,34,.5)}50%{box-shadow:0 0 0 6px rgba(242,101,34,0)}}
-  .live-dot{animation:pulse-dot 1.6s ease-in-out infinite}
-  @media (prefers-reduced-motion:reduce){.w-in,.feed-item,.roll-in{animation:none;opacity:1}}
-  #fallback-bg{background:radial-gradient(ellipse at 78% 18%,rgba(255,95,3,.22),rgba(255,95,3,0) 55%),radial-gradient(ellipse at 15% 85%,rgba(255,95,3,.12),rgba(255,95,3,0) 50%),#EFEFEF}
+html, body { background: #000000 !important; color: #ffffff; }
+:root{
+  --bg:#000000; --text:#ffffff; --muted:#9a9a9a; --stat:#d8d8d8; --border:rgba(255,255,255,.16); --border-soft:rgba(255,255,255,.12);
+  --acc:#F26522;
+  --logo:15.5px; --logo-mark:22px; --nav:14px; --nav-h:40px; --btn:13.5px; --btn-h:40px; --hero-btn-h:42px;
+  --h1:48px; --lede:15.5px; --badge:12.5px; --stat-size:13.5px; --header-y:22px; --header-x:40px; --stats-x:72px; --stats-y:36px;
+  --hero-gap:85px; --copy-max:860px; --lede-max:470px;
+  --ui:"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --serif:"Cormorant Garamond", "Instrument Serif", "Times New Roman", Times, serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html, body { background:#000000; background:var(--bg,#000000); color:#ffffff; color:var(--text,#ffffff); }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{font-family:var(--ui);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overflow-x:hidden;position:relative}
+a{color:inherit;text-decoration:none} button{font-family:inherit} img{display:block;max-width:100%}
+
+/* ---------- фон ---------- */
+.grain{position:fixed;inset:-50%;z-index:100;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+.hero-photo{position:absolute;inset:0;height:100vh;height:100dvh;overflow:hidden;z-index:0;pointer-events:none;animation:in-photo 2.2s var(--ease) both}
+.hero-photo .blob{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform}
+.b1{width:62vw;height:62vw;left:-14vw;top:-30vw;background:radial-gradient(circle,rgba(150,170,210,.55),rgba(150,170,210,0) 65%);animation:drift1 22s ease-in-out infinite alternate}
+.b2{width:54vw;height:54vw;right:-16vw;top:-6vw;background:radial-gradient(circle,rgba(210,210,215,.36),rgba(210,210,215,0) 65%);animation:drift2 26s ease-in-out infinite alternate}
+.b3{width:46vw;height:46vw;left:24vw;bottom:-28vw;background:radial-gradient(circle,rgba(242,101,34,.34),rgba(242,101,34,0) 65%);animation:drift3 30s ease-in-out infinite alternate}
+.b4{width:30vw;height:30vw;left:50%;top:28%;margin-left:-15vw;background:radial-gradient(circle,rgba(255,255,255,.12),rgba(255,255,255,0) 65%);animation:drift2 18s ease-in-out infinite alternate-reverse}
+.spot{position:absolute;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,rgba(190,205,240,.16),rgba(190,205,240,0) 62%);left:50%;top:40%;transition:opacity .6s}
+@keyframes drift1{to{transform:translate(18vw,14vw) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-16vw,12vw) scale(.9)}}
+@keyframes drift3{to{transform:translate(-10vw,-12vw) scale(1.2)}}
+@keyframes in-photo{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:none}}
+.hero-photo::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(0,0,0,0) 0%,rgba(0,0,0,.35) 70%),linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 70%,#000 100%)}
+.hero-photo .lines{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 120px);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 60%,transparent);-webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 60%,transparent)}
+
+/* ---------- первый экран ---------- */
+.page{position:relative;z-index:1;display:grid;grid-template-rows:auto 1fr auto;min-height:100vh;min-height:100dvh}
+.header{position:relative;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:var(--header-y) var(--header-x) 10px}
+.logo{display:inline-flex;align-items:center;gap:9px;justify-self:start;font-size:var(--logo);font-weight:600;letter-spacing:-.03em;color:#fff}
+.mark{display:inline-grid;place-items:center;width:calc(var(--logo-mark) + 4px);height:calc(var(--logo-mark) + 4px);border-radius:6px;font-size:10.5px;font-weight:700;letter-spacing:-.02em;color:#111;background:linear-gradient(160deg,#ffffff 0%,#d9d9d9 45%,#9e9e9e 100%);box-shadow:inset 0 1px 0 #fff,0 0 14px rgba(200,215,255,.18)}
+.logo-suffix{font-weight:400;color:#bdbdbd}
+#site-nav{display:flex;align-items:center;gap:8px;justify-self:center}
+#site-nav a{position:relative;overflow:hidden;display:inline-flex;align-items:center;height:var(--nav-h);padding:0 18px;border-radius:7px;border:1px solid rgba(198,198,198,.55);
+  background:linear-gradient(105deg,#050505 0%,#2a2a2a 48%,#4a4a4a 100%);color:#f3f3f3;font-size:var(--nav);font-weight:400;letter-spacing:-.01em;white-space:nowrap;
+  transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+#site-nav a::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.16) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s ease}
+#site-nav a:hover{border-color:rgba(235,235,235,.9);background:linear-gradient(105deg,#111 0%,#3a3a3a 45%,#6a6a6a 100%);box-shadow:0 0 18px rgba(200,210,230,.18)}
+#site-nav a:hover::before{transform:translateX(120%)}
+.header-right{justify-self:end;display:flex;align-items:center;gap:8px}
+.burger{display:none;width:42px;height:42px;border-radius:6px;border:1px solid var(--border);background:rgba(8,8,8,.55);z-index:60;place-items:center;cursor:pointer;transition:border-color .25s,background .25s}
+.burger:hover{border-color:rgba(255,255,255,.32);background:rgba(255,255,255,.05)}
+.burger span{display:flex;flex-direction:column;gap:5px}
+.burger i{display:block;width:16px;height:1.5px;background:#fff;border-radius:1px;transition:transform .25s,opacity .2s}
+body.menu-open .burger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+body.menu-open .burger i:nth-child(2){opacity:0}
+body.menu-open .burger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.menu-backdrop{display:none}
+
+/* кнопки */
+.btn{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:var(--btn-h);padding:0 16px;border-radius:6px;font-size:var(--btn);font-weight:500;letter-spacing:-.02em;line-height:1;white-space:nowrap;cursor:pointer;
+  transition:background .35s,border-color .35s,box-shadow .35s,color .35s,filter .35s,transform .35s var(--ease)}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.45) 48%,transparent 76%);transform:translateX(-130%);transition:transform .65s ease}
+.btn:hover::after{transform:translateX(130%)}
+.btn:active{transform:scale(.97)}
+.btn-solid{background:linear-gradient(180deg,#ffffff 0%,#e7e7e7 48%,#cfcfcf 100%);color:#111;border:1px solid #fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.95)}
+.btn-solid:hover{background:linear-gradient(180deg,#fff 0%,#f3f6ff 42%,#d5def2 100%);border-color:#f2f6ff;box-shadow:inset 0 1px 0 #fff,0 0 22px rgba(186,208,255,.35),0 8px 18px rgba(255,255,255,.12)}
+.btn-ghost{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(0,0,0,.45) 50%,rgba(160,175,200,.08));color:#fff;border:1px solid rgba(198,198,198,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}
+.btn-ghost:hover{background:linear-gradient(135deg,rgba(210,225,255,.18),rgba(0,0,0,.35) 48%,rgba(180,195,220,.16));border-color:rgba(220,230,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 20px rgba(170,200,255,.22)}
+.hero-actions .btn{height:var(--hero-btn-h);padding:0 18px}
+.hero-actions .btn-solid:hover{box-shadow:inset 0 1px 0 #fff,0 0 26px rgba(186,208,255,.4),0 8px 18px rgba(255,255,255,.14)}
+.hero-actions .btn-ghost{background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(0,0,0,.5) 46%,rgba(150,170,200,.1));border-color:rgba(198,198,198,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.hero-actions .btn-ghost:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 24px rgba(170,200,255,.28);border-color:rgba(220,230,255,.8)}
+.btn .arr{transition:transform .5s var(--ease)}
+.btn:hover .arr{transform:translateX(3px) rotate(-45deg)}
+
+/* герой */
+.hero{display:flex;align-items:flex-end;justify-content:center;padding:8px 24px var(--hero-gap);min-height:0}
+.hero-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:var(--copy-max);width:100%}
+.badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:22px;padding:9px 15px;border:0;border-radius:5px;background:linear-gradient(90deg,#7d7d7d 0%,#2a2a2a 52%,#0a0a0a 100%);color:#f2f2f2;font-size:var(--badge);font-weight:400;letter-spacing:-.01em}
+.badge-star{width:18px;height:20px;filter:drop-shadow(0 0 3px rgba(255,255,255,.45));animation:in-star .9s var(--ease) .28s both,twinkle 3.2s ease-in-out 1.4s infinite}
+@keyframes twinkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.82) rotate(18deg)}}
+h1{display:flex;flex-direction:column;align-items:center;font-size:var(--h1);font-weight:500;letter-spacing:-.045em;line-height:1.12;color:#fff}
+.headline-line{display:block;overflow:hidden;padding:.06em .15em .14em}
+.headline-line>span{display:inline-block}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.12em;letter-spacing:-.01em;color:#9a9a9a;display:inline-block;vertical-align:baseline}
+.rot{display:inline-grid;vertical-align:baseline}
+.rot>span{grid-area:1/1;transition:opacity .7s var(--ease),transform .7s var(--ease),filter .7s var(--ease)}
+.rot>span.off{opacity:0;transform:translateY(.45em);filter:blur(6px)}
+.rot>span.out{opacity:0;transform:translateY(-.45em);filter:blur(6px)}
+.lede{max-width:var(--lede-max);margin-top:18px;color:#9a9a9a;font-size:var(--lede);font-weight:400;line-height:1.55;letter-spacing:-.015em}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
+
+/* показатели */
+.stats{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--stats-x) var(--stats-y);padding-bottom:max(var(--stats-y),env(safe-area-inset-bottom));color:var(--stat)}
+.stat{display:inline-flex;align-items:center;gap:14px;font-size:var(--stat-size);letter-spacing:-.015em;white-space:nowrap}
+.stat svg{width:20px;height:20px;color:#e8e8e8;flex:none}
+.stat .stat-icon-wide{width:38px;height:21px}
+
+/* ---------- появление первого экрана ---------- */
+.appear{opacity:1;animation-duration:1.05s;animation-fill-mode:both;animation-timing-function:var(--ease);animation-delay:var(--d,.08s)}
+.appear--scale{animation-name:in-scale}.appear--soft{animation-name:in-soft}.appear--mask{animation-name:in-mask}.appear--pop{animation-name:in-pop}
+.appear--btn{animation-name:in-btn}.appear--side{animation-name:in-side}.appear--stat{animation-name:in-stat}
+.appear.is-in,.hero-photo.is-in{animation:none;opacity:1;transform:none;clip-path:none;filter:none}
+@keyframes in-scale{from{opacity:0;transform:scale(.84)}to{opacity:1;transform:none}}
+@keyframes in-soft{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes in-mask{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:none}}
+@keyframes in-pop{0%{opacity:0;transform:scale(.9)}70%{opacity:1;transform:scale(1.03)}100%{opacity:1;transform:scale(1)}}
+@keyframes in-btn{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes in-side{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes in-stat{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes in-star{0%{transform:scale(.2) rotate(-50deg)}65%{transform:scale(1.2) rotate(8deg)}100%{transform:none}}
+@keyframes in-em{from{opacity:.35;filter:blur(4px)}to{opacity:1;filter:none}}
+h1 em{animation:in-em 1.2s var(--ease) .72s both}
+
+/* ---------- секции ниже ---------- */
+.sec{position:relative;z-index:1;padding:120px var(--header-x)}
+.wrap{max-width:1240px;margin:0 auto}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;color:#bdbdbd;letter-spacing:.02em;margin-bottom:22px}
+.kicker b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#7d7d7d,#1a1a1a);color:#fff;font-size:11px;font-weight:600}
+.h2{font-size:clamp(30px,4.2vw,56px);font-weight:500;letter-spacing:-.04em;line-height:1.08}
+.h2 em{font-family:var(--serif);font-style:italic;font-weight:500;color:#9a9a9a;font-size:1.1em;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:16px;line-height:1.6;max-width:560px;margin-top:18px;letter-spacing:-.01em}
+.chips-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{font-size:12.5px;padding:7px 12px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:#d8d8d8}
+.chip.hot{background:linear-gradient(180deg,#fff,#d6d6d6);color:#111;border-color:#fff}
+
+/* бегущая строка */
+.ticker{position:relative;z-index:1;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);overflow:hidden;padding:18px 0;
+  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.ticker-track{display:flex;gap:44px;width:max-content;animation:tick 42s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker span{font-size:14px;color:#8a8a8a;white-space:nowrap;letter-spacing:-.01em}
+.ticker span i{font-style:normal;color:#4a4a4a;margin-right:10px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* услуги */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px}
+.svc{position:relative;overflow:hidden;border:1px solid var(--border-soft);border-radius:12px;padding:24px 24px 22px;background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.01) 40%,rgba(0,0,0,0));
+  transition:border-color .4s,transform .5s var(--ease),background .4s;cursor:default}
+.svc::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(200,215,255,.10),transparent 45%);opacity:0;transition:opacity .4s}
+.svc:hover{border-color:rgba(220,230,255,.35);transform:translateY(-3px)}
+.svc:hover::before{opacity:1}
+.svc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.svc-num{font-size:12px;color:#6f6f6f;font-variant-numeric:tabular-nums}
+.svc-ic{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;border:1px solid rgba(198,198,198,.4);background:linear-gradient(105deg,#050505,#2a2a2a 48%,#4a4a4a)}
+.svc-ic svg{width:17px;height:17px}
+.svc h3{font-size:19px;font-weight:500;letter-spacing:-.02em}
+.svc .cnt{display:none;font-size:12px;color:#7a7a7a}
+.svc ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.svc li{font-size:12.5px;color:#cfcfcf;padding:5px 10px;border-radius:5px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06)}
+
+/* как работаем */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px;counter-reset:s}
+.step{position:relative;border:1px solid var(--border-soft);border-radius:12px;padding:26px 24px 28px;background:linear-gradient(160deg,rgba(255,255,255,.04),rgba(0,0,0,0) 55%)}
+.step .num{font-family:var(--serif);font-style:italic;font-size:54px;line-height:1;color:#9a9a9a}
+.step h3{font-size:19px;font-weight:500;letter-spacing:-.02em;margin-top:18px}
+.step p{font-size:14px;color:var(--muted);line-height:1.55;margin-top:8px}
+.step .bar{position:absolute;left:24px;right:24px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:scaleX(0);transition:transform 1.2s var(--ease) .3s}
+.step.in .bar{transform:scaleX(1)}
+
+/* проекты */
+.proj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+.proj{display:block}
+.proj .shot{position:relative;aspect-ratio:16/10;border-radius:10px;overflow:hidden;border:1px solid var(--border-soft);background:#0b0b0b}
+.proj .shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .9s var(--ease),filter .6s}
+.proj:hover .shot img{transform:scale(1.05)}
+.proj .shot::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);transform:translateX(-120%);transition:transform .9s ease}
+.proj:hover .shot::after{transform:translateX(120%)}
+.proj .go{position:absolute;right:10px;bottom:10px;width:32px;height:32px;border-radius:7px;display:grid;place-items:center;background:linear-gradient(180deg,#fff,#d4d4d4);color:#111;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .5s var(--ease)}
+.proj:hover .go{opacity:1;transform:none}
+.proj p{font-size:13px;line-height:1.5;color:var(--muted);margin-top:14px}
+.proj b{display:block;font-size:14.5px;font-weight:500;color:#fff;margin-top:6px;letter-spacing:-.01em}
+
+/* контакты */
+.contact{text-align:center;padding:140px var(--header-x) 120px}
+.contact .h2{font-size:clamp(34px,5.4vw,76px)}
+.contact .sub{margin:20px auto 0}
+.tg{display:inline-flex;align-items:center;gap:16px;margin-top:40px;padding:10px 22px 10px 10px;border-radius:12px;border:1px solid rgba(198,198,198,.4);background:linear-gradient(105deg,#050505,#1e1e1e 48%,#3a3a3a);transition:border-color .35s,box-shadow .35s,transform .5s var(--ease)}
+.tg:hover{border-color:rgba(220,230,255,.8);box-shadow:0 0 24px rgba(170,200,255,.22);transform:translateY(-2px)}
+.tg i{width:46px;height:46px;border-radius:9px;display:grid;place-items:center;background:#2AABEE}
+.tg small{display:block;font-size:12px;color:#9a9a9a;text-align:left}
+.tg span{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.people{margin-top:22px;color:#6f6f6f;font-size:13px}
+footer.site{position:relative;z-index:1;border-top:1px solid var(--border-soft);padding:24px var(--header-x);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:#6f6f6f;font-size:12.5px}
+
+/* появление при прокрутке */
+.rv{opacity:0;transform:translateY(26px);filter:blur(6px);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:var(--rd,0s)}
+.rv.in{opacity:1;transform:none;filter:none}
+.rv-mask{display:block;overflow:hidden;padding-bottom:.08em}
+.rv-mask>span{display:inline-block;transform:translateY(105%);transition:transform 1.1s var(--ease);transition-delay:var(--rd,0s)}
+.rv-mask.in>span{transform:none}
+
+/* ---------- адаптив ---------- */
+@media (min-width:1600px){:root{--logo:17px;--logo-mark:24px;--nav:15px;--nav-h:44px;--btn:15px;--btn-h:44px;--hero-btn-h:48px;--h1:64px;--lede:18px;--badge:13.5px;--stat-size:15px;--header-y:28px;--header-x:64px;--stats-x:96px;--stats-y:44px;--copy-max:980px;--lede-max:540px}
+  #site-nav a{padding:0 20px}.badge{margin-bottom:26px}.lede{margin-top:22px}.hero-actions{margin-top:30px;gap:12px}.stat svg{width:22px;height:22px}.stat .stat-icon-wide{width:45px;height:24px}}
+@media (min-width:1920px){:root{--logo:18px;--logo-mark:26px;--nav:16px;--nav-h:48px;--btn:16px;--btn-h:48px;--hero-btn-h:52px;--h1:76px;--lede:20px;--badge:14.5px;--stat-size:16px;--header-y:32px;--header-x:80px;--stats-x:120px;--stats-y:52px;--copy-max:1120px;--lede-max:620px}
+  #site-nav{gap:10px}#site-nav a{padding:0 22px}.btn,.hero-actions .btn{padding:0 22px}.badge{padding:10px 15px}.stat .stat-icon-wide{width:48px;height:26px}}
+@media (min-width:2560px){:root{--h1:88px;--lede:22px;--header-x:120px;--stats-x:160px;--copy-max:1280px;--lede-max:680px}}
+@media (min-width:1280px) and (max-width:1599px){:root{--h1:54px;--lede:16px;--header-x:48px;--stats-x:80px;--copy-max:900px}}
+@media (min-width:901px) and (max-width:1279px){:root{--logo:15px;--nav:13px;--nav-h:36px;--btn:13px;--btn-h:38px;--hero-btn-h:40px;--h1:42px;--lede:15px;--badge:12px;--stat-size:12.5px;--header-y:16px;--header-x:28px;--stats-x:36px;--stats-y:28px;--hero-gap:64px;--copy-max:760px;--lede-max:440px}
+  #site-nav a{padding:0 14px}.badge{margin-bottom:16px}.lede{margin-top:14px}.hero-actions{margin-top:20px}.svc-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.proj-grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:901px) and (max-height:850px){:root{--header-y:14px;--stats-y:24px;--hero-gap:48px;--h1:40px}.badge{margin-bottom:12px}.lede{margin-top:12px}.hero-actions{margin-top:16px}}
+@media (min-width:901px) and (max-height:720px){:root{--h1:34px;--lede:14px;--hero-gap:32px;--stats-y:18px;--nav-h:30px;--btn-h:34px;--hero-btn-h:36px}.badge{margin-bottom:8px}}
+@media (min-width:901px){.page{height:100vh;height:100dvh}}
+@media (max-width:900px){
+  :root{--logo:16px;--btn:15px;--btn-h:46px;--hero-btn-h:48px;--h1:36px;--lede:16.5px;--badge:13.5px;--stat-size:15px;--header-y:16px;--header-x:18px;--stats-x:20px;--stats-y:28px;--hero-gap:36px}
+  .header{grid-template-columns:1fr auto auto;gap:8px;padding-top:max(var(--header-y),env(safe-area-inset-top))}
+  .logo,.header-right,.burger{z-index:80;position:relative}
+  .burger{display:grid}
+  .header-cta{height:42px;font-size:14px;padding:0 14px}
+  .menu-backdrop{display:block;position:fixed;inset:0;z-index:40;background:rgba(8,8,8,.42);opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s,backdrop-filter .28s}
+  body.menu-open .menu-backdrop{opacity:1;visibility:visible;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+  #site-nav{position:fixed;inset:0;z-index:45;flex-direction:column;justify-content:center;gap:12px;padding:96px 22px 32px;padding-top:max(96px,calc(env(safe-area-inset-top) + 88px));opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s,visibility .3s,transform .4s var(--ease)}
+  body.menu-open #site-nav{opacity:1;visibility:visible;transform:none}
+  #site-nav{align-items:stretch;justify-self:stretch;width:100%}#site-nav a{width:100%;max-width:440px;margin:0 auto;height:56px;font-size:19px;border-radius:10px;justify-content:center}
+  body.menu-open{overflow:hidden}
+  .hero{padding:20px 20px 64px}
+  .stats{flex-direction:column;justify-content:center;gap:16px}.stat{white-space:normal}
+  .hero-copy,.lede{max-width:100%}
+  .hero-photo{height:100svh}
+  .sec{padding:84px 18px}.contact{padding:96px 18px 84px}
+  .svc-grid{grid-template-columns:1fr;gap:10px;margin-top:36px}
+  .svc{padding:18px 18px;cursor:pointer}.svc-top{margin-bottom:10px}.svc .cnt{display:inline}.svc ul{display:none}.svc.open ul{display:flex}
+  .svc h3{display:flex;justify-content:space-between;align-items:baseline}
+  .steps{grid-template-columns:1fr 1fr;gap:10px;margin-top:36px}.step{padding:20px 18px}.step .num{font-size:40px}
+  .proj-grid{grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}.proj p{font-size:12px}.proj b{font-size:13px}
+  footer.site{padding:20px 18px}
+}
+@media (max-width:560px){:root{--h1:34px;--lede:16px;--header-x:16px}.hero-actions{flex-direction:column;width:100%}.hero-actions .btn{width:100%}.header-cta{display:none}.steps{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}
+  .appear,.hero-photo,.hero h1 em,.badge-star,.rv{opacity:1;transform:none;clip-path:none;filter:none}.rv-mask>span{transform:none}}
 </style>
-<script type="importmap">
-{ "imports": {
-  "react": "https://esm.sh/react@18.3.1",
-  "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?deps=react@18.3.1",
-  "htm": "https://esm.sh/htm@3.1.1",
-  "lucide-react": "https://esm.sh/lucide-react@0.460.0?deps=react@18.3.1",
-  "shaders/react": "https://esm.sh/shaders@4.0.4/react?deps=react@18.3.1,react-dom@18.3.1"
-} }
-</script>
 </head>
-<body>
-<div id="root"></div>
-<script type="module">
-import React, { useState, useEffect, Component } from 'react';
-import { createRoot } from 'react-dom/client';
-import htm from 'htm';
-import { ArrowRight, Clock, Menu, X, Inbox, PhoneCall, Bot, Globe, Send, MessageCircle } from 'lucide-react';
-const html = htm.bind(React.createElement);
-const EASE = 'duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]';
+<body style="background:#000;color:#fff">
+<div class="grain" aria-hidden="true"></div>
+<div class="hero-photo" aria-hidden="true"><div class="lines"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="spot" id="spot"></div></div>
 
-// ---------- шейдерный фон (если WebGPU недоступен — мягкий градиент) ----------
-class Safe extends Component { constructor(p) { super(p); this.state = { err: false }; } static getDerivedStateFromError() { return { err: true }; } render() { return this.state.err ? null : this.props.children; } }
-function HeroShader() {
-  const [S, setS] = useState(null);
-  useEffect(() => { if (!navigator.gpu) return; import('shaders/react').then(m => setS(m)).catch(() => {}); }, []);
-  useEffect(() => {
-    if (!S) return;
-    const touch = matchMedia('(hover: none), (pointer: coarse)').matches;
-    if (!touch) return;
-    let raf = 0, t0 = performance.now(), lastTouch = 0;
-    const onTouch = () => { lastTouch = performance.now(); };
-    addEventListener('touchmove', onTouch, { passive: true });
-    const loop = now => {
-      raf = requestAnimationFrame(loop);
-      if (scrollY > innerHeight * 1.1 || now - lastTouch < 2500) return;   // не мешаем пальцу и не тратим батарею ниже героя
-      const t = (now - t0) / 1000, w = innerWidth, h = innerHeight;
-      const x = w * (0.5 + 0.44 * Math.sin(t * 1.05) * Math.cos(t * 0.31));
-      const y = h * (0.42 + 0.36 * Math.sin(t * 1.45 + 1.3));
-      dispatchEvent(new MouseEvent('mousemove', { clientX: x, clientY: y }));
-    };
-    raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); removeEventListener('touchmove', onTouch); };
-  }, [S]);
-  if (!S) return null;
-  const { Shader, Swirl, ChromaFlow, FlutedGlass, FilmGrain } = S;
-  return html`<${Safe}><${Shader} className="w-full h-full">
-    <${Swirl} colorA="#ffffff" colorB="#f0f0f0" detail=${1.7} />
-    <${ChromaFlow} baseColor="#ffffff" downColor="#ff5f03" leftColor="#ff5f03" rightColor="#ff5f03" upColor="#ff5f03" momentum=${13} radius=${3.5} />
-    <${FlutedGlass} aberration=${0.61} angle=${31} frequency=${8} highlight=${0.12} highlightSoftness=${0} lightAngle=${-90} refraction=${4} shape="rounded" softness=${1} speed=${0.15} />
-    <${FilmGrain} strength=${0.05} />
-  <//><//>`;
-}
-
-// ---------- общие кусочки ----------
-const RollText = ({ text, h = 20 }) => html`
-  <span className=${`relative block overflow-hidden h-[${h}px]`} style=${{ height: h + 'px' }}>
-    <span className=${`flex flex-col transition-transform ${EASE} group-hover:-translate-y-1/2`}>
-      <span className="block" style=${{ height: h + 'px', lineHeight: h + 'px' }}>${text}</span>
-      <span className="block" style=${{ height: h + 'px', lineHeight: h + 'px' }}>${text}</span>
-    </span>
-  </span>`;
-
-function OrangeButton({ text, href = '#contacts', big = false }) {
-  return html`<a href=${href} className=${`group inline-flex items-center gap-3 self-start bg-[#F26522] hover:bg-[#e05a1a] text-white ${big ? 'text-[13px] sm:text-[14px] pl-5 sm:pl-6' : 'text-[13px] sm:text-[14px] pl-5'} font-medium rounded-full pr-2 py-2 transition-colors duration-300`}>
-    <${RollText} text=${text} />
-    <span className=${`flex items-center justify-center rounded-full bg-white ${big ? 'w-7 h-7 sm:w-8 sm:h-8' : 'w-7 h-7'}`}>
-      <${ArrowRight} size=${15} className=${`text-[#F26522] transition-transform ${EASE} group-hover:-rotate-45`} />
-    </span>
-  </a>`;
-}
-
-const Spark = ({ className }) => html`<svg viewBox="0 0 24 24" className=${className} aria-hidden="true">
-  <path d="M12 1.5c.5 4.9 2.3 8.6 7.2 9.6l3.3.7-3.3.7c-4.9 1-6.7 4.7-7.2 9.6-.5-4.9-2.3-8.6-7.2-9.6l-3.3-.7 3.3-.7C9.7 10.1 11.5 6.4 12 1.5Z"/>
-  <path d="M19.5 1.5c.2 1.8.9 2.7 2.5 3-1.6.3-2.3 1.2-2.5 3-.2-1.8-.9-2.7-2.5-3 1.6-.3 2.3-1.2 2.5-3Z" opacity=".6"/></svg>`;
-
-function useMoscowTime() {
-  const fmt = () => new Intl.DateTimeFormat('ru-RU', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Moscow' }).format(new Date());
-  const [t, setT] = useState(fmt());
-  useEffect(() => { const id = setInterval(() => setT(fmt()), 1000); return () => clearInterval(id); }, []);
-  return t;
-}
-
-
-// ---------- анимации главного экрана ----------
-const WORDS = ['рутину,', 'соцсети,', 'звонки,', 'рекламу,', 'сайты,', 'ботов,'];
-function RotatingWord() {
-  const [i, setI] = useState(0);
-  useEffect(() => { const id = setInterval(() => setI(v => (v + 1) % WORDS.length), 2200); return () => clearInterval(id); }, []);
-  return html`<span className="inline-block overflow-hidden align-bottom" style=${{ padding: '.06em 0 .16em', margin: '-.06em 0 -.16em' }}>
-    <span key=${i} className="roll-in inline-block whitespace-nowrap text-[#F26522]">${WORDS[i]}</span>
-  </span>`;
-}
-const Words = ({ text, start = 0 }) => text.split(' ').map((w, k) => html`<span key=${k} className="w-in" style=${{ animationDelay: (start + k * 0.07) + 's' }}>${w}${' '}</span>`);
-
-
-const Tile = ({ bg, children }) => html`<span className="tile w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)]" style=${{ background: bg }}>${children}</span>`;
-const ICONS = {
-  instagram: () => html`<${Tile} bg="linear-gradient(45deg,#f9a825 0%,#e1306c 50%,#833ab4 100%)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="#fff" stroke="none"/></svg><//>`,
-  tiktok: () => html`<${Tile} bg="#111"><svg width="17" height="17" viewBox="0 0 24 24"><path d="M15.5 3c.4 2.4 1.9 4 4.5 4.3v3.2c-1.6 0-3.1-.5-4.4-1.4v6.2a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v3.3a2.6 2.6 0 1 0 1.8 2.5V3h3Z" fill="#25F4EE" transform="translate(-.9 .6)"/><path d="M15.5 3c.4 2.4 1.9 4 4.5 4.3v3.2c-1.6 0-3.1-.5-4.4-1.4v6.2a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v3.3a2.6 2.6 0 1 0 1.8 2.5V3h3Z" fill="#FE2C55" transform="translate(.9 -.4)"/><path d="M15.5 3c.4 2.4 1.9 4 4.5 4.3v3.2c-1.6 0-3.1-.5-4.4-1.4v6.2a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v3.3a2.6 2.6 0 1 0 1.8 2.5V3h3Z" fill="#fff"/></svg><//>`,
-  avito: () => html`<${Tile} bg="#fff"><svg width="20" height="20" viewBox="0 0 24 24"><circle cx="16.5" cy="7" r="4.5" fill="#00AAFF"/><circle cx="7.5" cy="9" r="3" fill="#97CF26"/><circle cx="16" cy="16.5" r="3.2" fill="#A169F7"/><circle cx="8" cy="17" r="2" fill="#FF6163"/></svg><//>`,
-  whatsapp: () => html`<${Tile} bg="#25D366"><${MessageCircle} size=${18} color="#fff" strokeWidth=${2.2} /><//>`,
-  telegram: () => html`<${Tile} bg="#2AABEE"><${Send} size=${16} color="#fff" strokeWidth=${2.2} style=${{ marginLeft: '-2px' }} /><//>`,
-  lead: () => html`<${Tile} bg="#F26522"><${Inbox} size=${17} color="#fff" strokeWidth=${2.2} /><//>`,
-  phone: () => html`<${Tile} bg="#16A34A"><${PhoneCall} size=${16} color="#fff" strokeWidth=${2.2} /><//>`,
-  bot: () => html`<${Tile} bg="#6D5DF6"><${Bot} size=${18} color="#fff" strokeWidth=${2.1} /><//>`,
-  site: () => html`<${Tile} bg="#111827"><${Globe} size=${17} color="#fff" strokeWidth=${2} /><//>`,
-};
-
-const FEED = [
-  ['instagram', 'Пост опубликован', 'Инстаграм · карусель «7 видов вывесок»'],
-  ['lead', 'Новая заявка с сайта', 'Вывеска для кофейни · Москва'],
-  ['phone', 'Звонок завершён', 'Клиент записан на замер в четверг'],
-  ['bot', 'Бот ответил клиенту', '«Пришлите фото фасада — посчитаем»'],
-  ['tiktok', 'Ролик готов', 'ТикТок · «Стенд за одну ночь»'],
-  ['avito', 'Объявления обновлены', 'Авито · тексты, фото и цены'],
-  ['whatsapp', 'Рассылка отправлена', 'WhatsApp · постоянные клиенты'],
-  ['site', 'Правки на сайте', 'Обновлены цены и фото'],
-  ['telegram', 'Отчёт за неделю', 'Пришёл вам в Telegram'],
-];
-function ActivityFeed({ mobile = false }) {
-  const [n, setN] = useState(1);
-  useEffect(() => { const id = setInterval(() => setN(v => v + 1), 2100); return () => clearInterval(id); }, []);
-  const items = []; for (let k = Math.max(0, n - (mobile ? 2 : 4)); k < n; k++) items.push(k);
-  return html`<div className=${mobile ? "feed-mobile lg:hidden flex flex-col gap-1.5 mb-6 max-w-[290px]" : "hidden lg:flex absolute right-12 bottom-20 z-20 w-[330px] flex-col gap-2.5"}>
-    <div className="flex items-center gap-2 text-[12px] text-gray-600 mb-1 pl-1"><span className="live-dot w-2 h-2 rounded-full bg-[#F26522]"></span> Сейчас работаем за клиентов</div>
-    ${items.map((k, idx) => { const [ic, t, d] = FEED[k % FEED.length]; const age = items.length - 1 - idx;
-      return html`<div key=${k} className="feed-item bg-white/75 backdrop-blur-md rounded-2xl px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)] flex items-center gap-3 transition-opacity duration-700" style=${{ opacity: 1 - age * 0.22 }}>
-        ${ICONS[ic]()}
-        <span className="min-w-0"><span className="block text-[13px] font-semibold text-gray-900">${t}</span><span className="block text-[12px] text-gray-600 truncate">${d}</span></span>
-        <span className="ml-auto text-[11px] text-gray-400 shrink-0">${age === 0 ? 'сейчас' : age + ' мин'}</span>
-      </div>`; })}
-  </div>`;
-}
-
-const NAV = [['Главная', '#top'], ['Услуги', '#services'], ['Проекты', '#projects'], ['Контакты', '#contacts']];
-
-// ---------- 1. Главный экран ----------
-function Hero() {
-  const time = useMoscowTime();
-  const [open, setOpen] = useState(false);
-  useEffect(() => { document.body.style.overflow = open ? 'hidden' : ''; }, [open]);
-  return html`
-  <section className="relative min-h-screen bg-[#EFEFEF] flex flex-col overflow-hidden">
-    <div id="fallback-bg" className="absolute inset-0 z-0"></div>
-    <div className="absolute inset-0 z-10 pointer-events-none"><${HeroShader} /></div>
-
-    <div className="relative z-20 w-full max-w-[1440px] mx-auto p-2 sm:p-3">
-      <nav className="bg-white rounded-full p-[5px] flex items-center justify-between">
-        <div className="flex items-center gap-6">
-          <a href="#top" className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-900 rounded-full flex items-center justify-center text-white text-[10px] sm:text-[11px] font-bold tracking-tight">IA</a>
-          <div className="hidden md:flex items-center gap-6">
-            ${NAV.map(([l, h]) => html`<a key=${l} href=${h} className="text-[14px] text-gray-900 hover:text-gray-500 transition-colors duration-300">${l}</a>`)}
-          </div>
-        </div>
-        <div className="hidden md:flex items-center gap-5">
-          <span className="hidden lg:inline text-[13px] text-gray-600">Берём новые проекты на ноябрь</span>
-          <span className="flex items-center gap-1.5 text-[13px] text-gray-600"><${Clock} size=${14} /> ${time} в Москве</span>
-          <a href="#contacts" className="group flex items-center gap-3 bg-gray-900 text-white text-[13px] font-medium rounded-full pl-5 pr-2 py-2">
-            <${RollText} text="Обсудить задачу" />
-            <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center"><${ArrowRight} size=${13} className=${`text-gray-900 transition-transform ${EASE} group-hover:-rotate-45`} /></span>
-          </a>
-        </div>
-        <button type="button" onClick=${() => setOpen(!open)} className="md:hidden flex items-center gap-2 bg-gray-900 text-white text-[13px] font-medium rounded-full pl-4 pr-3 py-2.5">
-          ${open ? 'Закрыть' : 'Меню'} ${open ? html`<${X} size=${16} />` : html`<${Menu} size=${16} />`}
-        </button>
-      </nav>
+<div class="page">
+  <div class="menu-backdrop" aria-hidden="true"></div>
+  <header class="header">
+    <a class="logo appear appear--scale" style="--d:.08s" href="#top" aria-label="IA_agency">
+      <span class="mark" aria-hidden="true">IA</span><span>IA<span class="logo-suffix">_agency</span></span>
+    </a>
+    <nav id="site-nav" aria-label="Основная навигация">
+      <a class="appear appear--scale" style="--d:.16s" href="#services">Услуги</a>
+      <a class="appear appear--soft" style="--d:.28s" href="#how">Как работаем</a>
+      <a class="appear appear--scale" style="--d:.40s" href="#projects">Проекты</a>
+      <a class="appear appear--soft" style="--d:.52s" href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-right">
+      <a class="btn btn-solid header-cta appear appear--scale" style="--d:.34s" href="https://t.me/ia_agency" target="_blank" rel="noopener">Написать нам</a>
+      <button class="burger appear appear--scale" style="--d:.34s" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню"><span><i></i><i></i><i></i></span></button>
     </div>
+  </header>
 
-    <div className=${`fixed inset-0 z-50 md:hidden transition-[visibility] duration-500 ${open ? 'visible' : 'invisible pointer-events-none'}`}>
-      <div onClick=${() => setOpen(false)} className=${`absolute inset-0 bg-black/60 transition-opacity duration-500 ${open ? 'opacity-100' : 'opacity-0'}`}></div>
-      <div className=${`absolute left-0 right-0 bottom-0 mx-3 mb-3 bg-white rounded-2xl p-6 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
-        <span className="inline-flex items-center gap-1.5 text-[12px] text-gray-600 bg-gray-100 rounded-full px-3 py-1"><${Clock} size=${12} /> ${time} в Москве</span>
-        <div className="flex flex-col gap-1 mt-6 mb-8">
-          ${NAV.map(([l, h]) => html`<a key=${l} href=${h} onClick=${() => setOpen(false)} className="text-[28px] sm:text-[32px] font-medium text-gray-900 leading-tight">${l}</a>`)}
-        </div>
-        <a href="#contacts" onClick=${() => setOpen(false)} className="flex items-center justify-between bg-[#F26522] text-white text-[15px] font-medium rounded-full pl-6 pr-2 py-2">
-          Начать проект <span className="w-9 h-9 rounded-full bg-white flex items-center justify-center"><${ArrowRight} size=${16} className="text-[#F26522]" /></span>
-        </a>
+  <main class="hero" id="top">
+    <div class="hero-copy">
+      <div class="badge appear appear--pop" style="--d:.22s">
+        <svg class="badge-star" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2.6C12.55 2.6 12.88 3.15 13.08 4.7c.62 4.7 1.52 5.6 6.22 6.22 1.55.2 2.1.53 2.1 1.08s-.55.88-2.1 1.08c-4.7.62-5.6 1.52-6.22 6.22-.2 1.55-.53 2.1-1.08 2.1s-.88-.55-1.08-2.1c-.62-4.7-1.52-5.6-6.22-6.22C3.15 12.88 2.6 12.55 2.6 12s.55-.88 2.1-1.08c4.7-.62 5.6-1.52 6.22-6.22C11.12 3.15 11.45 2.6 12 2.6Z"/></svg>
+        Цифровая правая рука бизнеса
       </div>
-    </div>
-
-    <div className="flex-1"></div>
-    <${ActivityFeed} />
-    <div className="relative z-20 w-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 pb-10 sm:pb-16 lg:pb-20">
-      <${ActivityFeed} mobile=${true} />
-      <p className="w-in text-[13px] sm:text-[14px] text-gray-900 tracking-wide mb-5 sm:mb-8">IA_agency</p>
-      <h1 className="text-[clamp(2.05rem,9.4vw,4.2rem)] sm:text-[clamp(2.5rem,5vw,4.2rem)] font-medium leading-[1.08] tracking-[-0.03em] text-gray-900">
-        <span className="w-in" style=${{ animationDelay: '.1s' }}>Мы </span><span className="w-in" style=${{ animationDelay: '.17s' }}>забираем </span><span className="w-in" style=${{ animationDelay: '.24s' }}><${RotatingWord} /> </span><br className="hidden sm:block" />${Words({ text: 'чтобы вы занимались тем,', start: .34 })}<br className="hidden sm:block" />${Words({ text: 'что приносит деньги.', start: .62 })}
+      <h1>
+        <span class="headline-line"><span class="appear appear--mask" style="--d:.42s">Мы забираем <em class="rot" id="rot"><span>рутину</span><span class="off">соцсети</span><span class="off">звонки</span><span class="off">рекламу</span><span class="off">сайты</span><span class="off">ботов</span></em>,</span></span>
+        <span class="headline-line"><span class="appear appear--mask" style="--d:.62s">чтобы вы занимались делом.</span></span>
       </h1>
-      <div className="w-in mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-center" style=${{ animationDelay: '.9s' }}>
-        <${OrangeButton} text="Начать проект" big=${true} />
-        <span className="inline-flex self-start items-center gap-2.5 bg-white rounded-[4px] px-3 py-2 shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] transition-shadow duration-300">
-          <${Spark} className="w-5 h-5 sm:w-6 sm:h-6 fill-current text-[#E8704E]" />
-          <span className="text-[13px] sm:text-[14px] font-medium text-gray-900">Работаем с нейросетями</span>
-          <span className="text-[10px] sm:text-[11px] bg-gray-900 text-white px-1.5 sm:px-2 py-0.5 rounded">AI</span>
-        </span>
+      <p class="lede appear appear--soft" style="--d:.82s;animation-duration:1.25s">Соцсети, видео, звонки, рассылки, боты, реклама и сайты — одна команда вместо пяти подрядчиков. Снимаем с вас головную боль.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid appear appear--btn" style="--d:.96s" href="https://t.me/ia_agency" target="_blank" rel="noopener">Обсудить задачу <svg class="arr" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost appear appear--side" style="--d:1.10s" href="#projects">Смотреть проекты</a>
       </div>
     </div>
-  </section>`;
-}
+  </main>
 
-// ---------- 2. Услуги ----------
-const SERVICES = [
-  ['Соцсети', ['Контент-план', 'Посты и карусели', 'Сторис и Reels', 'Подписи и хэштеги', 'Оформление профиля', 'Публикация по расписанию', 'Ответы в комментариях']],
-  ['Видео', ['Идеи и сценарии', 'Монтаж из ваших фото и видео', 'Анимация', 'Озвучка голосом', 'Субтитры и музыка', 'ТикТок, Reels, Shorts']],
-  ['Реклама', ['Закуп рекламы в Telegram-каналах', 'Реклама у блогеров', 'Таргет в соцсетях', 'Креативы и баннеры', 'Отчёты по заявкам']],
-  ['Авито и маркетплейсы', ['Десятки объявлений за день', 'Автозагрузка XML/Excel', 'Продающие тексты', 'Обработка фото', 'Обновление цен', 'Карточки товаров']],
-  ['Звонки и клиенты', ['Прозвон клиентской базы', 'Холодные звонки по скрипту', 'Обработка заявок', 'Переписка в мессенджерах', 'Напоминания и сбор отзывов']],
-  ['Рассылки', ['WhatsApp и Telegram', 'E-mail и SMS', 'Акции и напоминания', 'Сегментация базы', 'Отчёт по откликам']],
-  ['Боты и автоматизация', ['Чат-бот для заявок', 'Бот записи', 'Автоответы', 'Уведомления о заказах', 'Связка CRM, таблиц и мессенджеров', 'Автоматические отчёты']],
-  ['Сайты', ['Правки текстов и цен', 'Редизайн — красивее и современнее', 'Сайт или лендинг с нуля', 'Формы заявок и онлайн-запись', 'Адаптация под телефоны', 'Аналитика']],
-  ['Презентации и документы', ['Презентация компании', 'Коммерческие предложения', 'PDF-каталоги и прайсы', 'Шаблоны писем и договоров', 'Таблицы и отчёты']],
-  ['Тексты', ['Тексты для сайта', 'Описания услуг и товаров', 'Посты и статьи', 'Письма клиентам']],
-  ['Дизайн', ['Логотип и фирменный стиль', 'Баннеры и креативы', 'Обработка фото', 'Шаблоны для соцсетей']],
-  ['Нейросети', ['Тексты и картинки с ИИ', 'Озвучка нейросетью', 'Видео с ИИ', 'Внедрение ИИ в процессы', 'Обучение команды']],
-];
+  <footer class="stats">
+    <div class="stat appear appear--stat" style="--d:1.12s">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="g1" x1="3" y1="2" x2="14" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#3a3a3a" stop-opacity=".62"/></linearGradient><linearGradient id="g2" x1="13" y1="2" x2="24" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#3a3a3a" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity=".62"/></linearGradient></defs><rect x="3.4" y="2.6" width="7.2" height="18.8" rx="3.6" fill="url(#g1)"/><rect x="13.4" y="2.6" width="7.2" height="18.8" rx="3.6" fill="url(#g2)"/><rect x="9.2" y="10.9" width="5.6" height="2.2" rx="1.1" fill="#4a4a4a"/></svg>
+      64 услуги в 12 направлениях</div>
+    <div class="stat appear appear--stat" style="--d:1.28s">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.4" y="2.4" width="19.2" height="19.2" rx="6.2" fill="#fff"/><path d="M12 7.1v7.4M8.15 12.35L12 16.2l3.85-3.85" stroke="#111" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      Одно окно — один чат для всех задач</div>
+    <div class="stat appear appear--stat" style="--d:1.44s">
+      <svg class="stat-icon-wide" viewBox="0 0 40 22" aria-hidden="true"><circle cx="10.2" cy="11" r="9.2" fill="#2b2b2b"/><path d="M5.3 6.3l1.5 3.4 1.6-1.9Z M15.1 6.3l-1.5 3.4-1.6-1.9Z" fill="#f4f4f4"/><ellipse cx="10.2" cy="12.1" rx="4.15" ry="3.7" fill="#f4f4f4"/><circle cx="8.7" cy="11.5" r=".7" fill="#1a1a1a"/><circle cx="11.7" cy="11.5" r=".7" fill="#1a1a1a"/><circle cx="20.2" cy="11" r="9.2" fill="#fff"/><circle cx="17.4" cy="9.8" r="1.7" fill="#111"/><circle cx="23" cy="9.8" r="1.7" fill="#111"/><ellipse cx="20.2" cy="12.4" rx=".9" ry=".6" fill="#111"/><path d="M17.8 14.3c1.4 1.3 3.4 1.3 4.8 0" stroke="#111" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle cx="30.2" cy="11" r="9.2" fill="#f26b1d"/><text x="30.2" y="15.1" font-size="12.5" text-anchor="middle" fill="#fff" font-family="Inter,Arial" font-weight="700">ai</text></svg>
+      Работаем с нейросетями</div>
+  </footer>
+</div>
 
-function Badge({ n, label, border = 'border-gray-200' }) {
-  return html`<div className="reveal px-5 sm:px-8 lg:px-12 flex items-center gap-3 mb-6 sm:mb-8">
-    <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-gray-900 text-white text-[11px] sm:text-[12px] font-semibold flex items-center justify-center">${n}</span>
-    <span className=${`text-[12px] sm:text-[13px] font-medium border ${border} rounded-full px-3 sm:px-4 py-1 sm:py-1.5 text-gray-900`}>${label}</span>
-  </div>`;
-}
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
 
-function Services() {
-  const [openSvc, setOpenSvc] = useState(0);
-  const total = SERVICES.reduce((s, [, i]) => s + i.length, 0);
-    return html`
-  <section id="services" className="bg-white pt-16 sm:pt-20 lg:pt-32 pb-12 sm:pb-16 lg:pb-24 overflow-hidden">
-    <div className="max-w-[1440px] mx-auto">
-      <${Badge} n="1" label="Что мы делаем" />
-      <h2 className="reveal px-5 sm:px-8 lg:px-12 text-[clamp(1.5rem,4vw,3.2rem)] font-medium leading-[1.12] tracking-[-0.02em] text-gray-900 mb-8 sm:mb-10">
-        Одна команда вместо пяти подрядчиков —<br className="hidden sm:block" /><span className="sm:hidden"> </span>соцсети, звонки, боты, реклама и сайты.
-      </h2>
+<section class="sec" id="services"><div class="wrap">
+  <div class="kicker rv"><b>1</b>Что мы делаем</div>
+  <h2 class="h2"><span class="rv-mask"><span>Одна команда вместо</span></span><span class="rv-mask" style="--rd:.08s"><span><em>пяти подрядчиков</em></span></span></h2>
+  <p class="sub rv" style="--rd:.15s">Берём на себя всю рутину и снимаем с вас головную боль. Пишете задачу в мессенджер — мы делаем её под ключ. Без найма штата, без долгих согласований и технических вопросов.</p>
+  <div class="chips-row rv" style="--rd:.22s"><span class="chip">Рутина — на нас</span><span class="chip">Головная боль — тоже</span><span class="chip hot">Вам — только результат</span></div>
+  <div class="svc-grid" id="svc"></div>
+</div></section>
 
-      <div className="reveal px-5 sm:px-8 lg:px-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-12" style=${{ transitionDelay: '.12s' }}>
-        <div className="max-w-[640px]">
-          <p className="text-[15px] sm:text-[17px] lg:text-[18px] leading-[1.6] font-medium text-gray-900">Берём на себя всю рутину и снимаем с вас головную боль. Пишете задачу в мессенджер — мы делаем её под ключ. Без найма штата, без долгих согласований и технических вопросов.</p>
-          <div className="flex flex-wrap gap-2 mt-5">
-            <span className="text-[13px] font-medium text-gray-900 bg-[#FFF1E9] rounded-full px-3.5 py-1.5">Рутина — на нас</span>
-            <span className="text-[13px] font-medium text-gray-900 bg-[#FFF1E9] rounded-full px-3.5 py-1.5">Головная боль — тоже</span>
-            <span className="text-[13px] font-medium text-white bg-gray-900 rounded-full px-3.5 py-1.5">Вам — только результат</span>
-          </div>
-        </div>
-        <${OrangeButton} text="Обсудить задачу" />
-      </div>
+<section class="sec" id="how" style="padding-top:40px"><div class="wrap">
+  <div class="kicker rv"><b>2</b>Как работаем</div>
+  <h2 class="h2"><span class="rv-mask"><span>Четыре шага —</span></span><span class="rv-mask" style="--rd:.08s"><span><em>и задача закрыта</em></span></span></h2>
+  <div class="steps">
+    <div class="step rv"><div class="bar"></div><div class="num">01</div><h3>Задача</h3><p>Пишете в Telegram голосом или текстом — можно в двух словах.</p></div>
+    <div class="step rv" style="--rd:.1s"><div class="bar"></div><div class="num">02</div><h3>План</h3><p>Предлагаем идеи и варианты. Вы выбираете — мы не делаем лишнего.</p></div>
+    <div class="step rv" style="--rd:.2s"><div class="bar"></div><div class="num">03</div><h3>Работа</h3><p>Делаем, показываем, вносим правки. С техникой разбираемся сами.</p></div>
+    <div class="step rv" style="--rd:.3s"><div class="bar"></div><div class="num">04</div><h3>Результат</h3><p>Готовые файлы, публикации по расписанию и понятный отчёт.</p></div>
+  </div>
+</div></section>
 
-      <div className="px-5 sm:px-8 lg:px-12 mt-16 sm:mt-20 lg:mt-28">
-        <div className="reveal flex items-end justify-between flex-wrap gap-3 mb-8">
-          <h3 className="text-[22px] sm:text-[28px] font-medium tracking-[-0.02em] text-gray-900">Все услуги</h3>
-          <span className="text-[13px] text-gray-600"><span className="sm:hidden">Нажмите на направление · </span>${total} услуг в ${SERVICES.length} направлениях — и это не предел</span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-gray-200 rounded-2xl overflow-hidden border border-gray-200">
-          ${SERVICES.map(([title, items], i) => html`
-            <div key=${title} onClick=${() => setOpenSvc(openSvc === i ? -1 : i)} style=${{ transitionDelay: (i % 3) * 0.08 + 's' }} className="reveal group bg-white p-5 sm:p-7 hover:bg-[#FFF6F1] transition-colors duration-300 cursor-pointer sm:cursor-default">
-              <div className="flex items-center justify-between mb-2 sm:mb-4">
-                <span className="text-[12px] font-semibold text-gray-400 tabular-nums">${String(i + 1).padStart(2, '0')}</span>
-                <span className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#F26522] group-hover:border-[#F26522] transition-colors duration-300">
-                  <${ArrowRight} size=${13} className=${`text-gray-900 group-hover:text-white transition-all ${EASE} -rotate-45 group-hover:rotate-0`} /></span>
-              </div>
-              <h4 className="text-[18px] sm:text-[20px] font-medium text-gray-900 tracking-[-0.01em] sm:mb-3 flex items-center justify-between">${title}<span className="sm:hidden text-[12px] font-normal text-gray-400">${openSvc === i ? 'скрыть' : items.length + ' услуг'}</span></h4>
-              <ul className=${`${openSvc === i ? 'flex mt-3' : 'hidden'} sm:flex flex-wrap gap-1.5`}>${items.map(x => html`<li key=${x} className="text-[13px] text-gray-700 bg-gray-100 rounded-full px-2.5 py-1">${x}</li>`)}</ul>
-            </div>`)}
-        </div>
-      </div>
-    </div>
-  </section>`;
-}
+<section class="sec" id="projects" style="padding-top:40px"><div class="wrap">
+  <div class="kicker rv"><b>3</b>Работа для клиентов</div>
+  <h2 class="h2"><span class="rv-mask"><span>Наши <em>проекты</em></span></span></h2>
+  <div class="proj-grid">
+    <a class="proj rv" href="https://maing.ru/" target="_blank" rel="noopener"><div class="shot"><img src="media/cases/m_home.jpg" alt="Сайт maing.ru" loading="lazy"><span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
+      <p>Производитель вывесок: ведём соцсети, делаем рассылки по клиентской базе и сделали ботов для заявок</p><b>MAING · вывески</b></a>
+    <div class="proj rv" style="--rd:.08s"><div class="shot"><img src="media/cases/m_stand.jpg" alt="Оформление стендов MAING" loading="lazy"></div>
+      <p>Оформление выставок и стендов: ведём соцсети и делаем рассылки по клиентской базе</p><b>MAING · стенды</b></div>
+    <a class="proj rv" style="--rd:.16s" href="https://velionagency.ru/" target="_blank" rel="noopener"><div class="shot"><img src="media/cases/v1.jpg" alt="Сайт velionagency.ru" loading="lazy"><span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
+      <p>Сайт агентства ботов и ИИ-агентов: дизайн, демо ИИ-агента и калькулятор стоимости</p><b>Velion · velionagency.ru</b></a>
+    <a class="proj rv" style="--rd:.24s" href="https://egolab.shop/" target="_blank" rel="noopener"><div class="shot"><img src="media/cases/egolab.jpg" alt="Сайт egolab.shop" loading="lazy"><span class="go"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg></span></div>
+      <p>Интернет-магазин спортивного питания: сделали сайт, настроили соцсети и ботов</p><b>EgoLab · egolab.shop</b></a>
+  </div>
+</div></section>
 
-// ---------- 3. Проекты ----------
-function Projects() {
-  return html`
-  <section id="projects" className="bg-[#F5F5F5] pt-16 sm:pt-20 lg:pt-28 pb-16 sm:pb-20 lg:pb-28">
-    <div className="max-w-[1440px] mx-auto">
-      <${Badge} n="2" label="Работа для клиентов" border="border-gray-300" />
-      <h2 className="reveal px-5 sm:px-8 lg:px-12 text-[clamp(1.75rem,7vw,4.2rem)] sm:text-[clamp(2.5rem,5vw,4.2rem)] font-medium leading-[1.08] tracking-[-0.03em] text-gray-900 mb-10 sm:mb-14 lg:mb-16">Наши проекты</h2>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-7 sm:gap-x-5 sm:gap-y-9 px-5 sm:px-8 lg:px-12">
-        <a href="https://maing.ru/" target="_blank" rel="noopener" className="reveal block" style=${{ transitionDelay: '0.00s' }}>
-          <div className="relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-[#1a1d2e] group cursor-pointer">
-            <img src="media/cases/m_home.jpg" alt="Сайт maing.ru — вывески" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
-            <span className="absolute z-10 bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 flex items-center h-8 w-8 group-hover:w-[148px] bg-white rounded-full overflow-hidden transition-all duration-300 ease-in-out">
-              <span className="pl-4 text-[13px] font-medium text-gray-900 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Подробнее</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute right-[9px] text-gray-900 -rotate-45 group-hover:rotate-0 transition-transform duration-300">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            </span>
-          </div>
-          <p className="text-[12px] sm:text-[13px] text-gray-600 mt-3 leading-snug">Производитель вывесок: ведём соцсети, делаем рассылки по клиентской базе и сделали ботов для заявок</p>
-          <p className="text-[13px] sm:text-[14px] font-semibold text-gray-900 mt-1">MAING · вывески</p>
-        </a>
-        <div className="reveal block" style=${{ transitionDelay: '0.12s' }}>
-          <div className="relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-[#6b6b6b] group">
-            <img src="media/cases/m_stand.jpg" alt="Сайт maing.ru — оформление стендов" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
-                      </div>
-          <p className="text-[12px] sm:text-[13px] text-gray-600 mt-3 leading-snug">Оформление выставок и стендов: ведём соцсети и делаем рассылки по клиентской базе</p>
-          <p className="text-[13px] sm:text-[14px] font-semibold text-gray-900 mt-1">MAING · стенды</p>
-        </div>
-        <a href="https://velionagency.ru/" target="_blank" rel="noopener" className="reveal block" style=${{ transitionDelay: '0.00s' }}>
-          <div className="relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-[#0b0d12] group cursor-pointer">
-            <img src="media/cases/v1.jpg" alt="Сайт velionagency.ru" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
-            <span className="absolute z-10 bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 flex items-center h-8 w-8 group-hover:w-[160px] bg-white rounded-full overflow-hidden transition-all duration-300 ease-in-out">
-              <span className="pl-4 text-[13px] font-medium text-gray-900 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Открыть сайт</span>
-              <${ArrowRight} size=${14} className="absolute right-[9px] text-gray-900 -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-            </span>
-          </div>
-          <p className="text-[12px] sm:text-[13px] text-gray-600 mt-3 leading-snug">Сайт агентства ботов и ИИ-агентов: дизайн, демо ИИ-агента и калькулятор стоимости</p>
-          <p className="text-[13px] sm:text-[14px] font-semibold text-gray-900 mt-1">Velion · velionagency.ru</p>
-        </a>
-        <a href="https://egolab.shop/" target="_blank" rel="noopener" className="reveal block" style=${{ transitionDelay: '0.12s' }}>
-          <div className="relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-[#f6c78c] group cursor-pointer">
-            <img src="media/cases/egolab.jpg" alt="Сайт egolab.shop" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
-            <span className="absolute z-10 bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 flex items-center h-8 w-8 group-hover:w-[160px] bg-gray-900 rounded-full overflow-hidden transition-all duration-300 ease-in-out">
-              <span className="pl-4 text-[13px] font-medium text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">Открыть сайт</span>
-              <${ArrowRight} size=${14} className="absolute right-[9px] text-white -rotate-45 group-hover:rotate-0 transition-transform duration-300" />
-            </span>
-          </div>
-          <p className="text-[12px] sm:text-[13px] text-gray-600 mt-3 leading-snug">Интернет-магазин спортивного питания: сделали сайт, настроили соцсети и ботов</p>
-          <p className="text-[13px] sm:text-[14px] font-semibold text-gray-900 mt-1">EgoLab · egolab.shop</p>
-        </a>
+<section class="contact" id="contacts">
+  <div class="kicker rv" style="justify-content:center"><b>4</b>Контакты</div>
+  <h2 class="h2"><span class="rv-mask"><span>Отдайте нам задачу,</span></span><span class="rv-mask" style="--rd:.1s"><span><em>на которую нет времени</em></span></span></h2>
+  <p class="sub rv" style="--rd:.18s">Первую задачу обсудим бесплатно — расскажем, как сделать и сколько это займёт.</p>
+  <a class="tg rv" style="--rd:.26s" href="https://t.me/ia_agency" target="_blank" rel="noopener">
+    <i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/></svg></i>
+    <span><small>Telegram</small>@ia_agency</span>
+  </a>
+  <div class="people rv" style="--rd:.32s">Игорь Р. · Алексей Т.</div>
+</section>
+<footer class="site"><span>IA_agency</span><span>Соцсети · видео · реклама · звонки · рассылки · боты · сайты</span></footer>
 
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const body = document.body;
 
-      </div>
-    </div>
-  </section>`;
-}
+  // ---------- данные услуг ----------
+  const IC = {
+    social: '<rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17" cy="7" r=".9" fill="#fff" stroke="none"/>',
+    video: '<rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10.5 21 8v8l-5-2.5"/>',
+    ads: '<path d="M4 14V10l11-5v14L4 14Z"/><path d="M7 15v3.5a1.5 1.5 0 0 0 3 0V16"/>',
+    avito: '<circle cx="15.5" cy="8" r="3.6"/><circle cx="7.6" cy="9.4" r="2.4"/><circle cx="15" cy="16.4" r="2.6"/><circle cx="8" cy="16.6" r="1.6"/>',
+    calls: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1"/>',
+    mail: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/>',
+    bot: '<rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/>',
+    site: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/>',
+    deck: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8 20h8M7 12l3-3 2 2 4-4"/>',
+    text: '<path d="M5 6h14M5 11h14M5 16h9"/>',
+    design: '<path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.6-1 1-1.8-.6-.9 0-2.2 1.2-2.2H17a4 4 0 0 0 4-4C21 7 17 3 12 3Z"/><circle cx="8" cy="11" r="1"/><circle cx="11" cy="7.5" r="1"/><circle cx="15.5" cy="8.5" r="1"/>',
+    ai: '<path d="M12 3.5c.4 3.9 1.9 6.7 5.8 7.6l2.7.6-2.7.6c-3.9.9-5.4 3.7-5.8 7.6-.4-3.9-1.9-6.7-5.8-7.6l-2.7-.6 2.7-.6c3.9-.9 5.4-3.7 5.8-7.6Z"/>',
+  };
+  const SERVICES = [
+    ['social', 'Соцсети', ['Контент-план', 'Посты и карусели', 'Сторис и Reels', 'Подписи и хэштеги', 'Оформление профиля', 'Публикация по расписанию', 'Ответы в комментариях']],
+    ['video', 'Видео', ['Идеи и сценарии', 'Монтаж из ваших фото и видео', 'Анимация', 'Озвучка голосом', 'Субтитры и музыка', 'ТикТок, Reels, Shorts']],
+    ['ads', 'Реклама', ['Закуп рекламы в Telegram-каналах', 'Реклама у блогеров', 'Таргет в соцсетях', 'Креативы и баннеры', 'Отчёты по заявкам']],
+    ['avito', 'Авито и маркетплейсы', ['Десятки объявлений за день', 'Автозагрузка XML/Excel', 'Продающие тексты', 'Обработка фото', 'Обновление цен', 'Карточки товаров']],
+    ['calls', 'Звонки и клиенты', ['Прозвон клиентской базы', 'Холодные звонки по скрипту', 'Обработка заявок', 'Переписка в мессенджерах', 'Напоминания и сбор отзывов']],
+    ['mail', 'Рассылки', ['WhatsApp и Telegram', 'E-mail и SMS', 'Акции и напоминания', 'Сегментация базы', 'Отчёт по откликам']],
+    ['bot', 'Боты и автоматизация', ['Чат-бот для заявок', 'Бот записи', 'Автоответы', 'Уведомления о заказах', 'Связка CRM, таблиц и мессенджеров', 'Автоматические отчёты']],
+    ['site', 'Сайты', ['Правки текстов и цен', 'Редизайн — красивее и современнее', 'Сайт или лендинг с нуля', 'Формы заявок и онлайн-запись', 'Адаптация под телефоны', 'Аналитика']],
+    ['deck', 'Презентации и документы', ['Презентация компании', 'Коммерческие предложения', 'PDF-каталоги и прайсы', 'Шаблоны писем и договоров', 'Таблицы и отчёты']],
+    ['text', 'Тексты', ['Тексты для сайта', 'Описания услуг и товаров', 'Посты и статьи', 'Письма клиентам']],
+    ['design', 'Дизайн', ['Логотип и фирменный стиль', 'Баннеры и креативы', 'Обработка фото', 'Шаблоны для соцсетей']],
+    ['ai', 'Нейросети', ['Тексты и картинки с ИИ', 'Озвучка нейросетью', 'Видео с ИИ', 'Внедрение ИИ в процессы', 'Обучение команды']],
+  ];
+  const svcEl = $('#svc');
+  SERVICES.forEach(([ic, t, items], i) => {
+    const d = document.createElement('div'); d.className = 'svc rv'; d.style.setProperty('--rd', (i % 3) * 0.08 + 's');
+    d.innerHTML = `<div class="svc-top"><span class="svc-num">${String(i + 1).padStart(2, '0')}</span><span class="svc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${IC[ic]}</svg></span></div>
+      <h3>${t}<span class="cnt">${items.length} услуг</span></h3><ul>${items.map(x => `<li>${x}</li>`).join('')}</ul>`;
+    d.addEventListener('click', () => { if (innerWidth <= 900) d.classList.toggle('open'); });
+    d.addEventListener('pointermove', e => { const r = d.getBoundingClientRect(); d.style.setProperty('--mx', (e.clientX - r.left) + 'px'); d.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
+    svcEl.appendChild(d);
+  });
+  if (innerWidth <= 900) svcEl.firstElementChild.classList.add('open');
+  // бегущая строка
+  const all = SERVICES.flatMap(s => s[2]);
+  const row = all.map(x => `<span><i>//</i>${x}</span>`).join('');
+  $('#ticker').innerHTML = row + row;
 
-// ---------- контакты ----------
-function Contacts() {
-  return html`
-  <section id="contacts" className="bg-gray-900 text-white">
-    <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-28 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10">
-      <div>
-        <p className="reveal text-[13px] text-gray-400 tracking-wide mb-5">Контакты</p>
-        <h2 className="reveal text-[clamp(1.75rem,5vw,3.6rem)] font-medium leading-[1.08] tracking-[-0.03em]" style=${{ transitionDelay: '.08s' }}>Отдайте нам задачу,<br/>на которую нет времени.</h2>
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-4 mt-10 text-[14px]">
-          <a href="https://t.me/ia_agency" target="_blank" rel="noopener" className="group inline-flex items-center gap-3">
-            <span className="w-10 h-10 rounded-full bg-[#2AABEE] flex items-center justify-center"><${Send} size=${17} color="#fff" strokeWidth=${2.2} style=${{ marginLeft: '-2px' }} /></span>
-            <span><span className="block text-gray-400 text-[12px]">Telegram</span><span className="block text-[18px] font-semibold group-hover:text-[#F26522] transition-colors duration-300">@ia_agency</span></span>
-          </a>
-          <span className="text-gray-400">Игорь Р. · Алексей Т.</span>
-        </div>
-      </div>
-      <div className="lg:self-end lg:pb-1"><${OrangeButton} text="Написать в Telegram" href="https://t.me/ia_agency" big=${true} /></div>
-    </div>
-    <div className="max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-12 py-6 border-t border-white/10 text-[12px] text-gray-500 flex justify-between flex-wrap gap-2">
-      <span>IA_agency</span><span>Соцсети · видео · реклама · звонки · боты · сайты</span>
-    </div>
-  </section>`;
-}
+  // ---------- появление первого экрана ----------
+  const appear = $$('.appear');
+  appear.forEach(el => el.addEventListener('animationend', e => { if (e.target === el) el.classList.add('is-in'); }, { once: true }));
+  const photo = $('.hero-photo');
+  photo.addEventListener('animationend', () => photo.classList.add('is-in'), { once: true });
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const el = appear[0];
+    const ok = el && el.getAnimations && el.getAnimations().some(a => a.playState === 'running' || a.playState === 'finished');
+    if (!ok) { appear.forEach(a => a.classList.add('is-in')); photo.classList.add('is-in'); }
+  }));
 
+  // ---------- меняющееся слово ----------
+  const rot = $('#rot'), words = [...rot.children]; let wi = 0;
+  setInterval(() => {
+    const cur = words[wi]; wi = (wi + 1) % words.length; const nx = words[wi];
+    cur.classList.add('out'); nx.classList.remove('off', 'out');
+    setTimeout(() => { cur.classList.remove('out'); cur.classList.add('off'); }, 700);
+  }, 2400);
 
-// ---------- плавная прокрутка к якорям ----------
-let scrollAnim = 0;
-const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-function smoothTo(y) {
-  cancelAnimationFrame(scrollAnim);
-  const start = scrollY, dist = y - start, dur = Math.min(1200, Math.max(700, Math.abs(dist) * 0.45)), t0 = performance.now();
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { scrollTo(0, y); return; }
-  const step = now => { const k = Math.min(1, (now - t0) / dur); scrollTo(0, start + dist * easeIO(k)); if (k < 1) scrollAnim = requestAnimationFrame(step); };
-  scrollAnim = requestAnimationFrame(step);
-}
-['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => cancelAnimationFrame(scrollAnim), { passive: true }));
-document.addEventListener('click', e => {
-  const a = e.target.closest('a[href^="#"]'); if (!a) return;
-  const id = a.getAttribute('href'); if (id === '#') return;
-  const el = id === '#top' ? null : document.querySelector(id);
-  if (id !== '#top' && !el) return;
-  e.preventDefault();
-  const y = el ? el.getBoundingClientRect().top + scrollY - 8 : 0;
-  // мобильное меню закрывается и снимает блокировку прокрутки — ждём кадр
-  requestAnimationFrame(() => smoothTo(Math.max(0, Math.min(y, document.documentElement.scrollHeight - innerHeight))));
-  history.replaceState(null, '', id === '#top' ? location.pathname : id);
-});
+  // ---------- появление при прокрутке ----------
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .14, rootMargin: '0px 0px -6% 0px' });
+  $$('.rv, .rv-mask').forEach(el => io.observe(el));
 
-// ---------- плавное появление блоков ----------
-function useReveal() {
-  useEffect(() => {
-    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    const scan = () => document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
-    scan(); const t = setTimeout(scan, 300);
-    return () => { io.disconnect(); clearTimeout(t); };
-  }, []);
-}
+  // ---------- свет за курсором (на телефоне гуляет сам) ----------
+  const spot = $('#spot'); let tx = innerWidth / 2, ty = innerHeight * .4, sx = tx, sy = ty, lastMove = 0;
+  addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { tx = e.clientX; ty = e.clientY; lastMove = performance.now(); } }, { passive: true });
+  (function loop(now) {
+    if (now - lastMove > 2500) { const t = now / 1000; tx = innerWidth * (.5 + .36 * Math.sin(t * .45)); ty = innerHeight * (.42 + .22 * Math.sin(t * .7 + 1)); }
+    sx += (tx - sx) * .06; sy += (ty - sy) * .06;
+    spot.style.transform = `translate(${sx - innerWidth / 2}px,${sy - innerHeight * .4}px)`;
+    requestAnimationFrame(loop);
+  })(performance.now());
 
-const App = () => { useReveal(); return html`<main id="top"><${Hero} /><${Services} /><${Projects} /><${Contacts} /></main>`; };
-createRoot(document.getElementById('root')).render(html`<${App} />`);
+  // ---------- меню ----------
+  const burger = $('.burger'), nav = $('#site-nav');
+  const setMenu = open => { body.classList.toggle('menu-open', open); burger.setAttribute('aria-expanded', String(open)); burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню'); };
+  burger.addEventListener('click', () => setMenu(!body.classList.contains('menu-open')));
+  $('.menu-backdrop').addEventListener('click', () => setMenu(false));
+  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  matchMedia('(min-width: 901px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+  // ---------- плавная прокрутка к якорям ----------
+  let anim = 0;
+  const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const smoothTo = y => { cancelAnimationFrame(anim); const st = scrollY, d = y - st, dur = Math.min(1300, Math.max(700, Math.abs(d) * .45)), t0 = performance.now();
+    const step = now => { const k = Math.min(1, (now - t0) / dur); scrollTo(0, st + d * easeIO(k)); if (k < 1) anim = requestAnimationFrame(step); }; anim = requestAnimationFrame(step); };
+  ['wheel', 'touchstart'].forEach(ev => addEventListener(ev, () => cancelAnimationFrame(anim), { passive: true }));
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = a.getAttribute('href'); const el = id === '#top' ? null : document.querySelector(id);
+    if (id !== '#top' && !el) return;
+    e.preventDefault(); setMenu(false);
+    const y = el ? el.getBoundingClientRect().top + scrollY - 10 : 0;
+    requestAnimationFrame(() => smoothTo(Math.max(0, Math.min(y, document.documentElement.scrollHeight - innerHeight))));
+  });
+})();
 </script>
 </body>
 </html>
