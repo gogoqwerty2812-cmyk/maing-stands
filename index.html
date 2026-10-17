@@ -68,6 +68,13 @@ a{color:inherit;text-decoration:none} button{font-family:inherit} img{display:bl
 .contact{position:relative;overflow:hidden}
 #ribbons2{position:absolute;inset:0;width:100%;height:100%;z-index:0;mix-blend-mode:screen;opacity:.8;
   mask-image:linear-gradient(180deg,transparent 0%,#000 35%,#000 70%,transparent 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 35%,#000 70%,transparent 100%)}
+body.menu-open .ab,body.menu-open .blob,body.menu-open .grain,body.menu-open .dots,body.menu-open .ticker-track{animation-play-state:paused!important}
+@media (max-width:900px),(hover:none){
+  .grain{animation:none}
+  .dots-lit{display:none}
+  .ab{filter:blur(60px)}
+  .hero-photo .blob{filter:blur(50px)}
+}
 /* ---------- первый экран ---------- */
 .page{position:relative;z-index:1;display:grid;grid-template-rows:auto 1fr auto auto;min-height:100vh;min-height:100dvh}
 .header{position:relative;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:var(--header-y) var(--header-x) 10px}
@@ -243,8 +250,8 @@ footer.site{position:relative;z-index:1;border-top:1px solid var(--border-soft);
   .logo,.header-right,.burger{z-index:80;position:relative}
   .burger{display:grid}
   .header-cta{height:42px;font-size:14px;padding:0 14px}
-  .menu-backdrop{display:block;position:fixed;inset:0;z-index:40;background:rgba(8,8,8,.42);opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s,backdrop-filter .28s}
-  body.menu-open .menu-backdrop{opacity:1;visibility:visible;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+  .menu-backdrop{display:block;position:fixed;inset:0;z-index:40;background:radial-gradient(ellipse at 50% 40%,#1c1e25,#050506 70%);opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s}
+  body.menu-open .menu-backdrop{opacity:1;visibility:visible}
   #site-nav{position:fixed;inset:0;z-index:45;flex-direction:column;justify-content:center;gap:12px;padding:96px 22px 32px;padding-top:max(96px,calc(env(safe-area-inset-top) + 88px));opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s,visibility .3s,transform .4s var(--ease)}
   body.menu-open #site-nav{opacity:1;visibility:visible;transform:none}
   #site-nav{align-items:stretch;justify-self:stretch;width:100%}#site-nav a{width:100%;max-width:440px;margin:0 auto;height:56px;font-size:19px;border-radius:10px;justify-content:center}
@@ -443,6 +450,7 @@ footer.site{position:relative;z-index:1;border-top:1px solid var(--border-soft);
   const spot = $('#spot'); let tx = innerWidth / 2, ty = innerHeight * .4, sx = tx, sy = ty, lastMove = 0;
   addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { tx = e.clientX; ty = e.clientY; lastMove = performance.now(); } }, { passive: true });
   (function loop(now) {
+    if (document.body.classList.contains('menu-open')) { requestAnimationFrame(loop); return; }
     if (now - lastMove > 2500) { const t = now / 1000; tx = innerWidth * (.5 + .36 * Math.sin(t * .45)); ty = innerHeight * (.42 + .22 * Math.sin(t * .7 + 1)); }
     sx += (tx - sx) * .06; sy += (ty - sy) * .06;
     spot.style.transform = `translate(${sx - innerWidth / 2}px,${sy - innerHeight * .4}px)`;
@@ -452,14 +460,17 @@ footer.site{position:relative;z-index:1;border-top:1px solid var(--border-soft);
 
   // ---------- светящиеся ленты ----------
   function ribbons(cv, R, fixedH) {
+    R = R.slice();
     if (!cv) return;
     const c = cv.getContext('2d'); let W = 0, H = 0, visible = true;
     const size = () => { W = cv.clientWidth || innerWidth; H = fixedH ? cv.clientHeight : innerHeight; cv.width = W; cv.height = H; };
     size(); addEventListener('resize', size);
     new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(cv);
+    const mobile = matchMedia('(max-width: 900px), (hover: none)').matches;
+    if (mobile) R = R.map(r => ({ ...r, lines: Math.round(r.lines * .55) }));
     const draw = now => {
       requestAnimationFrame(draw);
-      if (!visible) return;
+      if (!visible || document.body.classList.contains('menu-open')) return;
       const t = now / 1000;
       c.clearRect(0, 0, W, H); c.globalCompositeOperation = 'lighter'; c.lineCap = 'round';
       const step = Math.max(14, W / 80);
@@ -502,6 +513,7 @@ footer.site{position:relative;z-index:1;border-top:1px solid var(--border-soft);
 
   // ---------- подсветка точечной сетки за курсором ----------
   (() => {
+    if (matchMedia('(max-width: 900px), (hover: none)').matches) return;
     const lit = document.getElementById('dotsLit'); let tx = innerWidth / 2, ty = innerHeight / 2, x = tx, y = ty, last = 0;
     addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { tx = e.clientX; ty = e.clientY; last = performance.now(); } }, { passive: true });
     (function loop(now) {
